@@ -1,8 +1,10 @@
+
+
 const { Message, Client, MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'unban',
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('BAN_MEMBERS')) {
@@ -11,7 +13,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Ban Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Ban Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -22,7 +24,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Ban Members\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I must have \`Ban Members\` permissions to execute this command.`
                         )
                 ]
             })
@@ -34,7 +36,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -46,7 +48,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't provided the id of the member to *Unban*.`
+                            `<a:Cross:1265733965180960849> | You didn't provided the id of the member to *Unban*.`
                         )
                 ]
             })
@@ -58,7 +60,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | This user isn't banned in this server.`
+                                `<a:Cross:1265733965180960849> | This user isn't banned in this server.`
                             )
                     ]
                 })
@@ -69,7 +71,7 @@ module.exports = {
                             new MessageEmbed()
                                 .setColor(client.color)
                                 .setDescription(
-                                    `${client.emoji.cross} | I was unable to *Unban* that member.`
+                                    `<a:Cross:1265733965180960849> | I was unable to *Unban* that member.`
                                 )
                         ]
                     })
@@ -79,7 +81,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.tick} | Successfully unbanned the member.`
+                                `<a:Check:1265733979085078610> | Successfully unbanned the member.`
                             )
                     ]
                 })

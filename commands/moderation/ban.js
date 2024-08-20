@@ -1,9 +1,11 @@
+
+
 const { Message, Client, MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'ban',
     aliases: ['hackban', 'fuckban', 'fuckoff'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     /**
      *
@@ -18,7 +20,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Ban Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Ban Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -29,7 +31,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Ban Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | I must have \`Ban Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -45,7 +47,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | Please Provide Valid user ID or Mention Member.`
+                                `<a:Cross:1265733965180960849> | Please Provide Valid user ID or Mention Member.`
                             )
                     ]
                 })
@@ -54,7 +56,7 @@ module.exports = {
         let rea = args.slice(1).join(' ') || 'No Reason Provided'
         rea = `${message.author.tag} (${message.author.id}) | ` + rea
         const kaalo = new MessageEmbed()
-            .setDescription(`${client.emoji.cross} | User Not Found`)
+            .setDescription(`<a:Cross:1265733965180960849>| User Not Found`)
             .setColor(client.color)
         if (user === undefined)
             return message.channel.send({ embeds: [kaalo] })
@@ -65,7 +67,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | If You Ban Me Then Who Will Protect Your Server Dumb!?`
+                            `<a:Cross:1265733965180960849> | **If You Ban Me Then Who Will Protect Your Server CutiePie!?** `
                         )
                 ]
             })
@@ -75,7 +77,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I can't ban the owner of this server.`
+                            `<a:Cross:1265733965180960849> | I can't ban the owner of this server.`
                         )
                 ]
             })
@@ -85,7 +87,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<:stolen_emoji:1249318563437871194> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -99,7 +101,7 @@ module.exports = {
                         message.author.displayAvatarURL({ dynamic: true })
                     )
                     .setDescription(
-                        `You Have Been Banned From ${message.guild.name} \nExecutor : ${message.author.tag} \nReason : \`${rea}\``
+                        `**You Have Been Banned From** ${message.guild.name} \nExecutor : ${message.author.tag} \nReason : \`${rea}\``
                     )
                     .setColor(client.color)
                     .setThumbnail(
@@ -113,14 +115,14 @@ module.exports = {
             } catch (err) {
                 const embed = new MessageEmbed()
                     .setDescription(
-                        `${client.emoji.cross} |  My highest role is below **<@${user.id}>** `
+                        `<a:Cross:1265733965180960849> |  My highest role is below **<@${user.id}>** `
                     )
                     .setColor(client.color)
                 return message.channel.send({ embeds: [embed] })
             }
             const done = new MessageEmbed()
                 .setDescription(
-                    `${client.emoji.tick} | Successfully banned **<@${user.id}>** from the server.`
+                    `<a:Check:1265733979085078610> | Successfully banned **<@${user.id}>** from the server.`
                 )
                 .setColor(client.color)
             return message.channel.send({ embeds: [done] })
@@ -146,14 +148,14 @@ module.exports = {
             } catch (err) {
                 const embed = new MessageEmbed()
                     .setDescription(
-                        `${client.emoji.cross} |  My highest role is below or same as **<@${user.id}>** `
+                        `<a:Cross:1265733965180960849> |  My highest role is below or same as **<@${user.id}>** `
                     )
                     .setColor(client.color)
                 return message.channel.send({ embeds: [embed] })
             }
             const done = new MessageEmbed()
                 .setDescription(
-                    `${client.emoji.tick} | Successfully banned **<@${user.id}>** from the server.`
+                    `<a:Check:1265733979085078610> | Successfully banned **<@${user.id}>** from the server.`
                 )
                 .setColor(client.color)
             return message.channel.send({ embeds: [done] })

@@ -1,3 +1,5 @@
+
+
 const {
     Message,
     Client,
@@ -90,7 +92,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.tick} | **${user.name} (${user.id})** has been added as a **Blacklist** server.`
+                            `<a:Check:1265733979085078610> | **${user.name} (${user.id})** has been added as a **Blacklist** server.`
                         )
                 ]
             })
@@ -105,7 +107,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.tick} | **${user.name} (${user.id})** has been removed from a **Blacklist** Server.`
+                            `<a:Check:1265733979085078610> | **${user.name} (${user.id})** has been removed from a **Blacklist** Server.`
                         )
                 ]
             })

@@ -1,3 +1,5 @@
+
+
 const {
     Message,
     Client,
@@ -11,7 +13,7 @@ module.exports = {
     name: 'hide',
     aliases: [],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_CHANNELS')) {

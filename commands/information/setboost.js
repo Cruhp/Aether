@@ -1,3 +1,5 @@
+
+
 const { MessageEmbed } = require('discord.js')
 const db = require('../../models/boost.js')
 
@@ -12,7 +14,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Administration\` perms to run this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Administration\` perms to run this command.`
                         )
                 ]
             })
@@ -30,7 +32,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't provided a valid channel.`
+                            `<a:Cross:1265733965180960849> | You didn't provided a valid channel.`
                         )
                 ]
             })
@@ -45,7 +47,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I didn't have permissions to send messages in <#${channel.id}>.`
+                            `<a:Cross:1265733965180960849> | I didn't have permissions to send messages in <#${channel.id}>.`
                         )
                 ]
             })
@@ -64,8 +66,8 @@ module.exports = {
                     .setColor(client.color)
                     .setDescription(
                         disable
-                            ? `${client.emoji.tick} | I'll not send messages when when someone boosts the server.`
-                            : `${client.emoji.tick} | I'll now send messages to <#${channel.id}> when someone boosts the server.`
+                            ? `<a:Check:1265733979085078610> | I'll not send messages when when someone boosts the server.`
+                            : `<a:Check:1265733979085078610> | I'll now send messages to <#${channel.id}> when someone boosts the server.`
                     )
             ]
         })

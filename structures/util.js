@@ -9,7 +9,7 @@ const {
 } = require('discord.js')
 const { getSettingsar } = require('../models/autorole')
 
-this.config = require(`${process.cwd()}/config.json`)
+this.config = require(`../config.json`)
 let globalCooldown = false
 
 module.exports = class Util {

@@ -5,13 +5,13 @@ const {
     MessageActionRow,
     MessageButton
 } = require('discord.js')
-const saixd = ['1180425876798701588','1143155471159664710'];
+const ricky = ['1092374628556615690', '1092374628556615690']
 module.exports = {
     name: 'reload',
     aliases: ['rlcmd'],
-    category: 'owner',
+    category: 'Owner',
     run: async (client, message, args) => {
-        if (!saixd.includes(message.author.id)) return
+        if (!ricky.includes(message.author.id)) return
         try {
             let reload = false
             for (let i = 0; i < client.categories.length; i += 1) {
@@ -21,7 +21,7 @@ module.exports = {
                         const opp = new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | You didn't provided the command name.`
+                                `<a:Cross:1265733965180960849> | You didn't provided the command name.`
                             )
                         return message.channel.send({ embeds: [opp] })
                     }
@@ -38,21 +38,21 @@ module.exports = {
                 const op = new MessageEmbed()
                     .setColor(client.color)
                     .setDescription(
-                        `${client.emoji.tick} | Successfully reloaded \`${args[0]}\``
+                        `<a:Check:1265733979085078610> | Successfully reloaded \`${args[0]}\``
                     )
                 return message.channel.send({ embeds: [op] })
             }
             const notop = new MessageEmbed()
                 .setColor(client.color)
                 .setDescription(
-                    `${client.emoji.cross} | I was unable to reload \`${args[0]}\``
+                    `<a:Cross:1265733965180960849> | I was unable to reload \`${args[0]}\``
                 )
             return message.channel.send({ embeds: [notop] })
         } catch (e) {
             const emesdf = new MessageEmbed()
                 .setColor(client.color)
                 .setDescription(
-                    `${client.emoji.cross} | I was unable to reload \`${args[0]}\``
+                    `<a:Cross:1265733965180960849> | I was unable to reload \`${args[0]}\``
                 )
             return message.channel.send({ embeds: [emesdf] })
         }

@@ -10,10 +10,10 @@ module.exports = {
             Guild: message.guildId,
             Member: message.author.id
         })
-        const reason = args.join(' ') ? args.join(' ') : "I'm AFK :)"
+        const reason = args.join(' ') ? args.join(' ') : "idk <:theshrug:1266165185501069433>"
         if (data) {
             const embed = new MessageEmbed()
-                .setTitle('UwU, you are already AFK.')
+                .setTitle(' **<a:sleeping_vw:1266164794654986251> you are already AFK.** ')
                 .setColor(client.color)
             return message.channel.send({ embeds: [embed] })
         } else {
@@ -25,7 +25,7 @@ module.exports = {
             })
             await newData.save()
             const embed = new MessageEmbed()
-                .setDescription(`Your AFK is now set to: **${reason}**`)
+                .setDescription(`<a:sleeping_vw:1266164794654986251> **Your AFK is now set to**: **${reason}**`)
                 .setColor(client.color)
             return message.channel.send({ embeds: [embed] })
         }

@@ -1,9 +1,11 @@
+
+
 const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'unmute',
-    aliases: ['untimeout'],
+    aliases: ['um'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MODERATE_MEMBERS')) {
@@ -12,7 +14,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Timeout Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Timeout Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -23,7 +25,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Timeout Members\` permissions to run this command.`
+                            `<a:Cross:1265733965180960849> | I must have \`Timeout Members\` permissions to run this command.`
                         )
                 ]
             })
@@ -37,7 +39,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't mentioned the member whom you want to mute.`
+                            `<a:Cross:1265733965180960849> | You didn't mentioned the member whom you want to mute.`
                         )
                 ]
             })
@@ -54,27 +56,27 @@ async function untimeout(issuer, target, reason) {
     const response = await unTimeoutTarget(issuer, target, reason)
     if (typeof response === 'boolean')
         return getEmbed(
-            `${client.emoji.tick} | Successfully unmuted <@${target.user.id}>!`,
+            `<a:Check:1265733979085078610>| Successfully unmuted <@${target.user.id}>!`,
             client
         )
     if (response === 'BOT_PERM')
         return getEmbed(
-            `${client.emoji.cross} | I don't have enough permissions to unmute <@${target.user.id}>.`,
+            `<a:Cross:1265733965180960849> | I don't have enough permissions to unmute <@${target.user.id}>.`,
             client
         )
     else if (response === 'MEMBER_PERM')
         return getEmbed(
-            `${client.emoji.cross} | You don't have enough permissions to unmute <@${target.user.id}>.`,
+            `<:stolen_emoji:1249318563437871194> | You don't have enough permissions to unmute <@${target.user.id}>.`,
             client
         )
     else if (response === 'NO_TIMEOUT')
         return getEmbed(
-            `${client.emoji.cross} | <@${target.user.id}> is not muted only!`,
+            `<a:Cross:1265733965180960849> | <@${target.user.id}> is not muted only!`,
             client
         )
     else
         return getEmbed(
-            `${client.emoji.cross} | I don't have enough perms to unmute <@${target.user.id}>.`,
+            `<a:Cross:1265733965180960849> | I don't have enough perms to unmute <@${target.user.id}>.`,
             client
         )
 }
@@ -82,7 +84,7 @@ async function untimeout(issuer, target, reason) {
 async function unTimeoutTarget(issuer, target, reason) {
     if (!memberInteract(issuer, target)) return 'MEMBER_PERM'
     if (!memberInteract(issuer.guild.me, target)) return 'BOT_PERM'
-    if (target.communicationDisabledUntilTimestamp - Date.now() < 30)
+    if (target.communicationDisabledUntilTimestamp - Date.now() < 0)
         return 'NO_TIMEOUT'
 
     try {

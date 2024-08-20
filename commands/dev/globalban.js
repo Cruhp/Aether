@@ -1,12 +1,13 @@
 const { MessageEmbed } = require('discord.js');
 
-const saixd = ['1180425876798701588','1143155471159664710'];
+const ricky = ['1092374628556615690', '1244009539225780384'];
+
 module.exports = {
     name: 'globalban',
-    aliases: [],
-    category: 'owner',
+    aliases: ['gban'],
+    category: 'Owner',
     run: async (client, message, args) => {
-        if (!saixd.includes(message.author.id)) return;
+        if (!ricky.includes(message.author.id)) return;
 
         let userId = args[0];
         if (!userId) {
@@ -14,7 +15,7 @@ module.exports = {
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
-                        .setDescription(`${client.emoji.cross} | Please Provide Valid user ID or Mention Member.`)
+                        .setDescription(`<a:Cross:1265733965180960849> | Please Provide Valid user ID or Mention Member.`)
                 ]
             });
         }
@@ -32,7 +33,7 @@ module.exports = {
                             } catch (error) {
                                 message.channel.send(`Can't Ban User`);
                             }
-                        }, 3000); // 3000 milliseconds delay (3 seconds)
+                        }, 2000); // 2000 milliseconds delay (3 seconds)
                     }
                 }
             } catch (error) {

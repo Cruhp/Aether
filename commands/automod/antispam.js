@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js')
-let enable = `<:Satxler_DNo:1218049715799851058><:Satxler_Eyes:1218049874596204594>`
-let disable = `<:Satxler_Dyes:1218050682305773639><:Satxler_Eno:1218051067389153290>`
-let protect = `<:Satxler_Ant:1222728518732091403>`
-let hii = `<:Hii:1220745498621771776>`
+let enable = `<a:Cross:1265733965180960849><:1180470648053702657:1259150067470831646>`
+let disable = `<a:Cross:1265733965180960849><:1180470648053702657:1259150067470831646>`
+let protect = `<:moderation_icon:1259371762496438285>`
+let hii = `<:Threads:1265734023808815134>`
 const wait = require('wait')
 
 module.exports = {
@@ -11,17 +11,17 @@ module.exports = {
     cooldown: 5,
     category: 'automod',
     subcommand: ['enable', 'disable', 'punishment', 'limit'],
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
         const embed = new MessageEmbed().setColor(client.color)
 
-        if (message.guild.memberCount < 30) {
+        if (message.guild.memberCount < 0) {
             return message.channel.send({
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | Your Server Doesn't Meet My 30 Member Criteria`
+                            `<a:Cross:1265733965180960849> | Your Server Doesn't Meet My 30 Member Criteria`
                         )
                 ]
             })
@@ -33,7 +33,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Administrator\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Administrator\` permissions to use this command.`
                         )
                 ]
             })
@@ -44,7 +44,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Administrator\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I don't have \`Administrator\` permissions to execute this command.`
                         )
                 ]
             })
@@ -59,13 +59,13 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
         }
 
-        let prefix = message.guild.prefix || '&' // Correct way to define default prefix
+        let prefix = message.guild.prefix || '--' // Correct way to define default prefix
 
         const option = args[0]
         const isActivatedAlready =
@@ -74,36 +74,38 @@ module.exports = {
         const antispam = new MessageEmbed()
             .setThumbnail(client.user.avatarURL({ dynamic: true }))
             .setColor(client.color)
-            .setTitle('__**Antispam**__')
+            .setTitle('__**Fortify Your Server with Antispam!**__')
             .setDescription(
-                'Prevent spam and maintain the integrity of your server with Antispam! Our advanced algorithms swiftly detect and handle spam messages, ensuring a clean and enjoyable environment for your community.'
+                'Defend your server against spam and uphold its integrity with Antispam! Our cutting-edge algorithms swiftly detect and handle spam messages, ensuring a pristine and enjoyable environment for your community.'
             )
             .addField(
-                '__**Antispam Enable**__',
-                `To Enable Antispam, use \`${prefix}antispam enable\``
+                '__**Activate Antispam**__',
+                `To enable Antispam, use \`${prefix}antispam enable\``
             )
             .addField(
-                '__**Antispam Disable**__',
-                `To Disable Antispam, use \`${prefix}antispam disable\``
+                '__**Deactivate Antispam**__',
+                `To disable Antispam, use \`${prefix}antispam disable\``
             )
             .addField(
-                '__**Antispam Punishment**__',
-                'Configure the punishment for spammers.'
+                '__**Configure Antispam Punishment**__',
+                'Choose the punishment for spammers.'
             )
             .addField(
-                'Options',
+                '__**Punishment Options**__',
                 '`ban` - Ban spammers, `kick` - Kick spammers, `mute` - Mute spammers'
             )
             .addField(
-                '__**Antispam Limit**__',
-                'Configure the message limit to trigger antispam.'
+                '__**Set Antispam Threshold**__',
+                'Adjust the message limit to trigger Antispam.'
             )
             .addField(
-                'Usage',
-                'Use numbers to specify the message limit, e.g., `4`, `10`'
+                '__**Threshold Usage**__',
+                'Specify the message limit with numbers, e.g., `4`, `10`'
             )
             .setTimestamp()
             .setFooter(client.user.username, client.user.displayAvatarURL())
+
+
 
         switch (option) {
             case undefined:
@@ -328,7 +330,7 @@ module.exports = {
                     const embedMessage = new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.tick} | **Spam Threshold Updated**`
+                            `<:1180470648053702657:1259150067470831646> | **Spam Threshold Updated**`
                         )
                         .addField('New Spam Threshold', `${limit}`, true)
                         .setTimestamp()
@@ -341,7 +343,7 @@ module.exports = {
                     const embedMessage = new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | **Error: Invalid Message Count Limit**`
+                            `<a:Cross:1265733965180960849> | **Error: Invalid Message Count Limit**`
                         )
                         .addField(
                             'Valid Range',

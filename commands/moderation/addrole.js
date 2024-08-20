@@ -1,3 +1,7 @@
+
+
+
+
 const { Message, Client, MessageEmbed, Permissions } = require('discord.js')
 const Discord = require('discord.js')
 const ms = require('ms')
@@ -10,7 +14,7 @@ module.exports = {
     name: 'role',
     aliases: ['r'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     /**
      *
@@ -27,7 +31,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Manage Roles\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Manage Roles\` permissions to use this command.`
                         )
                 ]
             })
@@ -38,7 +42,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Manage Roles\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I don't have \`Manage Roles\` permissions to execute this command.`
                         )
                 ]
             })
@@ -53,7 +57,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -71,7 +75,7 @@ module.exports = {
                         embed
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | You didn't provided a valid role.\n\`${message.guild.prefix}role all <role>\``
+                                `<a:Cross:1265733965180960849> | You didn't provided a valid role.\n\`${message.guild.prefix}role all <role>\``
                             )
                     ]
                 })
@@ -174,7 +178,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't used the command correctly.\n\`${message.guild.prefix}role <user> <role>\``
+                            `<a:Cross:1265733965180960849> | You didn't used the command correctly.\n\`${message.guild.prefix}role <user> <role>\``
                         )
                 ]
             })
@@ -187,7 +191,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't provided a valid role.\n\`${message.guild.prefix}role <user> <role>\``
+                            `<a:Cross:1265733965180960849> | You didn't provided a valid role.\n\`${message.guild.prefix}role <user> <role>\``
                         )
                 ]
             })
@@ -198,7 +202,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | This Role Is Managed By Integration`
+                            `<a:Cross:1265733965180960849> | This Role Is Managed By Integration`
                         )
                 ]
             })
@@ -209,7 +213,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I can't provide this role as my highest role is either below or equal to the provided role.`
+                            `<a:Cross:1265733965180960849> | I can't provide this role as my highest role is either below or equal to the provided role.`
                         )
                 ]
             })
@@ -220,7 +224,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I can't provide this role as your highest role is either below or equal to the provided role.`
+                            `<:stolen_emoji:1249318563437871194> | I can't provide this role as your highest role is either below or equal to the provided role.`
                         )
                 ]
             })
@@ -236,7 +240,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.tick} | Successfully removed <@&${role.id}> from <@${member.id}>.`
+                            `<a:Check:1265733979085078610> | Successfully removed <@&${role.id}> from <@${member.id}>.`
                         )
                 ]
             })
@@ -250,7 +254,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.tick} | Successfully added <@&${role.id}> to <@${member.id}>.`
+                            `<a:Check:1265733979085078610> | Successfully added <@&${role.id}> to <@${member.id}>.`
                         )
                 ]
             })

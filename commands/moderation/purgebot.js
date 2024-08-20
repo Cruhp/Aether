@@ -1,9 +1,13 @@
+
+
+
+
 const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'purgebots',
-    aliases: ['pb'],
+    aliases: ['pb','cbot'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_MESSAGES')) {
@@ -12,7 +16,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Manage Messages\` permissions to use this command.`
+                            `<:stolen_emoji:1249318563437871194> | You must have \`Manage Messages\` permissions to use this command.`
                         )
                 ]
             })
@@ -28,7 +32,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Manage Messages\`, \`Read Message History\` permissions to use this command.`
+                            `<:stolen_emoji:1249318563437871194> | I must have \`Manage Messages\`, \`Read Message History\` permissions to use this command.`
                         )
                 ]
             })
@@ -41,7 +45,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | Maximum **99** bot messages can be purged at a time.`
+                            `<:stolen_emoji:1249318563437871194> | Maximum **99** bot messages can be purged at a time.`
                         )
                 ]
             })
@@ -57,7 +61,7 @@ module.exports = {
                 .send({
                     embeds: [
                         embed.setDescription(
-                            `${client.emoji.tick} | Successfully deleted ${response} bot messages.`
+                            `<:stolen_emoji:1249318723932913778> | Successfully deleted ${response} bot messages.`
                         )
                     ]
                 })
@@ -70,7 +74,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [
                     embed.setDescription(
-                        `${client.emoji.cross} | I must have \`Manage Messages\`, \`Read Message History\` permissions to use this command.`
+                        `<:stolen_emoji:1249318563437871194> | I must have \`Manage Messages\`, \`Read Message History\` permissions to use this command.`
                     )
                 ]
             })
@@ -78,7 +82,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [
                     embed.setDescription(
-                        `${client.emoji.cross} | You must have \`Manage Messages\` permissions to use this command.`
+                        `<:stolen_emoji:1249318563437871194> | You must have \`Manage Messages\` permissions to use this command.`
                     )
                 ]
             })
@@ -86,7 +90,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [
                     embed.setDescription(
-                        `${client.emoji.cross} | There were no bots messages to purge.`
+                        `<:stolen_emoji:1249318563437871194> | There were no bots messages to purge.`
                     )
                 ]
             })
@@ -94,7 +98,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [
                     embed.setDescription(
-                        `${client.emoji.cross} | I was unable to delete the messages`
+                        `<:stolen_emoji:1249318563437871194> | I was unable to delete the messages`
                     )
                 ]
             })

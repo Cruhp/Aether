@@ -1,3 +1,5 @@
+
+
 const { MessageEmbed } = require('discord.js')
 module.exports = async (client) => {
     client.on('messageCreate', async (message) => {
@@ -43,7 +45,7 @@ module.exports = async (client) => {
                             try {
                                 await message.member.timeout(
                                     30 * 60 * 1000,
-                                    'Satxler | ANTILINK | TIMEOUT'
+                                    'Desert-Advance | ANTILINK | TIMEOUT'
                                 )
                                 let scucess = await message.channel.send({
                                     embeds: [
@@ -70,7 +72,7 @@ module.exports = async (client) => {
                             try {
                                 await message.guild.members.kick(
                                     message.member.id,
-                                    'Satxler | ANTILINK | KICK'
+                                    'Desert-Advance | ANTILINK | KICK'
                                 )
                                 let scucess = await message.channel.send({
                                     embeds: [
@@ -95,7 +97,7 @@ module.exports = async (client) => {
                         await message.delete()
                         if (message.member.bannable) {
                             try {
-                                let reason = 'Satxler | ANTILINK | BAN'
+                                let reason = 'Desert-Advance | ANTILINK | BAN'
                                 await message.guild.members
                                     .ban(message.member.id, { reason: reason })
                                     .catch((e) => console.log(e))
@@ -193,7 +195,7 @@ module.exports = async (client) => {
                                 try {
                                     await message.member.timeout(
                                         30 * 60 * 1000,
-                                        'Satxler | ANTISPAM | TIMEOUT'
+                                        'Kyzex-Advance | ANTISPAM | TIMEOUT'
                                     )
                                     let success = await message.channel.send({
                                         embeds: [
@@ -219,7 +221,7 @@ module.exports = async (client) => {
                             if (message.member.kickable) {
                                 try {
                                     await message.member.kick(
-                                        'Satxler | ANTISPAM | KICK'
+                                        'Kyzex-Advance | ANTISPAM | KICK'
                                     )
                                     let success = await message.channel.send({
                                         embeds: [
@@ -244,7 +246,7 @@ module.exports = async (client) => {
                             if (message.member.banable) {
                                 try {
                                     await message.member.ban(
-                                        'Satxler | ANTISPAM | BAN'
+                                        'Kyzex-Advance | ANTISPAM | BAN'
                                     )
                                     let success = await message.channel.send({
                                         embeds: [

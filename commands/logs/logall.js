@@ -1,3 +1,5 @@
+
+
 const {
     Message,
     Client,
@@ -16,7 +18,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`MANAGE SERVER\` permissions to use this command.`
+                            `<:tick:1253563089404825691> | You must have \`MANAGE SERVER\` permissions to use this command.`
                         )
                 ]
             })
@@ -27,7 +29,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<:tick:1253563089404825691> | You must have a higher role than me to use this command.`
                         )
                 ]
             })

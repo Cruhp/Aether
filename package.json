@@ -39,8 +39,8 @@
         "util": "^0.12.4",
         "wait": "^0.4.2"
     },
-    "name": "Bitzxier",
-    "description": "Premium Bot",
+    "name": "Ather",
+    "description": "Multipurpose Bot",
     "version": "2.0.0",
     "main": "./index.js",
     "scripts": {
@@ -49,15 +49,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Terminator/"
+        "url": "git+https://github.com/akshew/"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Terminator"
+        "url": "https://github.com/akshew"
     },
-    "homepage": "https://github.com/Terminator",
+    "homepage": "https://github.com/akshew",
     "devDependencies": {
         "prettier": "^3.2.5"
     }

@@ -1,8 +1,12 @@
+
+
+
+
 const { Message, Client, MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 module.exports = {
     name: 'roleicon',
     category: 'info',
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
         const aastik = new MessageEmbed().setColor(client.color)
         let own = message.author.id == message.guild.ownerId
@@ -12,7 +16,7 @@ module.exports = {
                     aastik
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Manage Roles\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Manage Roles\` permissions to use this command.`
                         )
                 ]
             })
@@ -23,7 +27,7 @@ module.exports = {
                     aastik
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Manage Roles\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I don't have \`Manage Roles\` permissions to execute this command.`
                         )
                 ]
             })
@@ -38,43 +42,43 @@ module.exports = {
                     aastik
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
         }
         
 const check = parseInt(message.guild.premiumTier.split("_")[1]);
-    if(message.guild.premiumTier === "NONE") return message.channel.send({embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Your Server Doesn't Meet The **Roleicon Requirements**. Servers with level **2** boosts are allowed to set role icons`)]})
+    if(message.guild.premiumTier === "NONE") return message.channel.send({embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Your Server Doesn't Meet The **Roleicon Requirements**. Servers with level **2** boosts are allowed to set role icons`)]})
     
     if(check < 2)
-      return message.channel.send({embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Your Server Doesn't Meet The **Roleicon** Requirements. Servers with level **2** boosts are allowed to set role icons`)]})
- if(!args[0]) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | ${message.guild.prefix}roleicon <role> <emoji>`)]});
+      return message.channel.send({embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Your Server Doesn't Meet The **Roleicon** Requirements. Servers with level **2** boosts are allowed to set role icons`)]})
+ if(!args[0]) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | ${message.guild.prefix}roleicon <role> <emoji>`)]});
     const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);
-    if(!role) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Provide valid role.`)]})
+    if(!role) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Provide valid role.`)]})
     if(role && !role.editable) {
-        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | ${role} is having higher position than my role`)]});    
+        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | ${role} is having higher position than my role`)]});    
     }
     if(role.iconURL() && !args[1]){
         try  {
       role.setIcon(null)
-    const embed = new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.tick} | Successfully Removed Icon From ${role}`)
+    const embed = new MessageEmbed().setColor(client.color).setDescription(`<a:Check:1265733979085078610> | Successfully Removed Icon From ${role}`)
     return message.channel.send({ embeds: [embed] })
      }catch(err) {
-        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | ${role} is having higher position than my role`)]});    
+        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | ${role} is having higher position than my role`)]});    
      } 
     } 
-    if(!args[1]) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Provide **provide** an emoji.`)]})
+    if(!args[1]) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Provide **provide** an emoji.`)]})
     const emojiRegex = /<a?:\w{2,}:\d{17,20}>/g;
-    if(!args[1].match(emojiRegex)) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Provide provide a **valid** emoji.`)]})
+    if(!args[1].match(emojiRegex)) return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Provide provide a **valid** emoji.`)]})
     const emojiID = args[1].replace(/[^0-9]/g, '');
     const baseUrl = `https://cdn.discordapp.com/emojis/${emojiID}`;
     try {
         await role.setIcon(baseUrl).catch(err => null)
-     const embed = new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.tick} | Successfully Iconified the ${role}`)
+     const embed = new MessageEmbed().setColor(client.color).setDescription(`<a:Check:1265733979085078610> | Successfully Iconified the ${role}`)
     return message.channel.send({ embeds: [embed] })
      } catch(err) {
-        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | ${role} is having higher position than my role`)]});    
+        return message.channel.send({embeds:[new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | ${role} is having higher position than my role`)]});    
       }
 
       }

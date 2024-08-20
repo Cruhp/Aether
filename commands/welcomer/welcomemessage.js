@@ -1,3 +1,5 @@
+
+
 const { MessageEmbed } = require('discord.js')
 const { getSettingsar } = require('../../models/autorole')
 
@@ -6,13 +8,13 @@ module.exports = {
     aliases: ['welcomemsg'],
     category: 'welcomer',
     run: async (client, message, args) => {
-        if (message.guild.memberCount < 30) {
+        if (message.guild.memberCount < 1) {
             return message.channel.send({
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | Your Server Doesn't Meet My 30 Member Criteria`
+                            `<a:Cross:1265733965180960849> | Your Server Doesn't Meet My 5 Member Criteria`
                         )
                 ]
             })
@@ -37,7 +39,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -67,7 +69,7 @@ module.exports = {
                     ]
                 })
             }
-            if (time > 30 || time < 30) {
+            if (time > 30 || time < 0) {
                 return message.channel.send({
                     embeds: [
                         new MessageEmbed()

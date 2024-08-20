@@ -4,7 +4,7 @@ const axios = require('axios')
 module.exports = {
     name: 'banner',
     category: 'info',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         let user =
@@ -38,7 +38,7 @@ module.exports = {
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
-                        .setDescription(`You Don't Have A Banner`)
+                        .setDescription(`**User Doesn't Have A Banner**`)
                 ]
             })
         }

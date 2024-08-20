@@ -1,3 +1,5 @@
+
+
 const {
     Message,
     Client,
@@ -9,15 +11,16 @@ const {
 module.exports = {
     name: 'showlogs',
     aliases: ["logconfig","viewlogs"],
-    category: 'logging',
+    category: 'owner',
     run: async (client, message, args) => {
+        if (!this.config.admin.includes(message.author.id)) return
         if (!message.member.permissions.has('MANAGE_GUILD')) {
             return message.channel.send({
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`MANAGE SERVER\` permissions to use this command.`
+                            `<:tick:1253563089404825691> | You must have \`MANAGE SERVER\` permissions to use this command.`
                         )
                 ]
             })
@@ -28,7 +31,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<:tick:1253563089404825691> | You must have a higher role than me to use this command.`
                         )
                 ]
             })

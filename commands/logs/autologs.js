@@ -1,3 +1,9 @@
+
+
+
+
+
+
 const {
     Message,
     Client,
@@ -8,7 +14,7 @@ const {
 module.exports = {
     name: 'autologs',
     aliases: ['autolog'],
-    cooldown: 5,
+    cooldown: 4,
     category: 'logging',
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_GUILD')) {
@@ -17,7 +23,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`MANAGE SERVER\` permissions to use this command.`
+                            `<:icons_cross:1245257113824137298> | You must have \`MANAGE SERVER\` permissions to use this command.`
                         )
                 ]
             });
@@ -28,7 +34,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Administrator\` permissions to execute this command.`
+                            `<:icons_cross:1245257113824137298> | I don't have \`Administrator\` permissions to execute this command.`
                         )
                 ]
             })
@@ -40,7 +46,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<:icons_cross:1245257113824137298> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -50,10 +56,10 @@ module.exports = {
             await client.db.set(`logs_${message.guild.id}`,{ 
                 voice : null,
                 channel : null,
-                rolelog : null,
-                modlog : null,   
+                rolelogs : null,
+                modlogs : null,   
                 message : null,
-                memberlog : null
+                memberlogs : null
             })
             const initialMessage = await message.channel.send({
                 embeds: [new MessageEmbed().setColor(client.color).setDescription('Configuring your server...')],
@@ -69,7 +75,7 @@ module.exports = {
                 ],
               });
                       } 
-        if(data.modlog || data.memberlog || data.message || data.channel || data.rolelog || data.voice ){
+        if(data.modlogs || data.memberlogs || data.message || data.channel || data.rolelogs || data.voice ){
 
             return message.channel.send({
                 embeds: [
@@ -78,7 +84,7 @@ module.exports = {
                         .setTitle('Logging System is Already Set Up')
                         .setDescription('Your server already has a configured logging system.')
                         .addField('How to Reset Logging?', 'You can manage logging settings using the appropriate commands.')
-                        .setFooter(`Note : If you wannna setup logging again use ${message.guild.prefix}logsreset & delete all existinglog channels of Satxler`, client.user.displayAvatarURL())
+                        .setFooter(`Note : If you wannna setup logging again use ${message.guild.prefix}logsreset & delete all existinglog channels of Desert-Advance`, client.user.displayAvatarURL())
                 ]
             });
             
@@ -87,10 +93,10 @@ module.exports = {
 
 
         try {
-            let category = message.guild.channels.cache.find(c => c.type === 'GUILD_CATEGORY' && c.name === 'Satxler-LOGS');
+            let category = message.guild.channels.cache.find(c => c.type === 'GUILD_CATEGORY' && c.name === 'Desert-Advance-LOGS');
 
             if (!category) {
-                category = await message.guild.channels.create('Satxler-LOGS', {
+                category = await message.guild.channels.create('Desert-Advance-LOGS', {
                     type: 'GUILD_CATEGORY',
                     permissionOverwrites: [
                         {
@@ -119,7 +125,7 @@ module.exports = {
                                     .setTitle('Logging System is Already Set Up')
                                     .setDescription('Your server already has a configured logging system.')
                                     .addField('How to Reset Logging?', 'You can manage logging settings using the appropriate commands.')
-                                    .setFooter(`Note : If you wannna setup logging again use ${message.guild.prefix}logsreset & delete all existinglog channels of Satxler`, client.user.displayAvatarURL())
+                                    .setFooter(`Note : If you wannna setup logging again use ${message.guild.prefix}logsreset & delete all existinglog channels of Trick-Advance`, client.user.displayAvatarURL())
                             ]
                         });
                     }
@@ -138,20 +144,20 @@ module.exports = {
                     reason: 'Creating logging channels as part of autologs setup.'
                 });
             }
-let voicelog = await message.guild.channels.cache.find(channel => channel.name === 'voicelogs')
-let channellog = await message.guild.channels.cache.find(channel => channel.name === 'channellogs')
-let rolelog = await message.guild.channels.cache.find(channel => channel.name === 'rolelogs')
-let modlog = await message.guild.channels.cache.find(channel => channel.name === 'modlogs')
-let msglog = await message.guild.channels.cache.find(channel => channel.name === 'msglogs')
-let memberlog = await message.guild.channels.cache.find(channel => channel.name === 'memberlogs')
+let voicelogs = await message.guild.channels.cache.find(channel => channel.name === 'voicelogs')
+let channellogs = await message.guild.channels.cache.find(channel => channel.name === 'channellogs')
+let rolelogs = await message.guild.channels.cache.find(channel => channel.name === 'rolelogs')
+let modlogs = await message.guild.channels.cache.find(channel => channel.name === 'modlogs')
+let msglogs = await message.guild.channels.cache.find(channel => channel.name === 'msglogs')
+let memberlogs = await message.guild.channels.cache.find(channel => channel.name === 'memberlogs')
 
     await client.db.set(`logs_${message.guild.id}`,{ 
-        voice : voicelog.id,
-        channel : channellog.id,
-        rolelog : rolelog.id,
-        modlog : modlog.id,   
-        message : msglog.id,
-        memberlog : memberlog.id
+        voice : voicelogs.id,
+        channel : channellogs.id,
+        rolelogs : rolelogs.id,
+        modlogs : modlogs.id,   
+        message : msglogs.id,
+        memberlogs : memberlogs.id
     })
     
     return message.channel.send({
@@ -159,8 +165,8 @@ let memberlog = await message.guild.channels.cache.find(channel => channel.name 
             new MessageEmbed()
                 .setColor(client.color)
                 .setTitle('Logging Channels Setup Complete')
-                .setDescription('All necessary logging channels have been successfully created under the "Satxler LOGS" category.')
-                .addField('Channels Created', '- **modlog:** Logs moderation-related events.\n- **memberlog:** Logs member-related events.\n- **msglog:** Logs message-related events.\n- **channellog:** Logs channel-related events.\n- **voicelog:** Logs voice-related events\n- **rolelog:** Logs role-related events.')
+                .setDescription('All necessary logging channels have been successfully created under the "Desert-Advance LOGS" category.')
+                .addField('Channels Created', '- **modlogs:** Logs moderation-related events.\n- **memberlogs:** Logs member-related events.\n- **msglogs:** Logs message-related events.\n- **channellogs:** Logs channel-related events.\n- **voicelogs:** Logs voice-related events\n- **rolelogs:** Logs role-related events.')
                 .addField('Additional Configuration', 'You can further customize logging settings and manage permissions as needed.')
         ]
     });

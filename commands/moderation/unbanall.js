@@ -1,10 +1,12 @@
+
+
 const { Message, Client, MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: 'unbanall',
     aliases: [],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     /**
      *
@@ -19,7 +21,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Ban Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Ban Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -30,7 +32,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Ban Members\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I must have \`Ban Members\` permissions to execute this command.`
                         )
                 ]
             })
@@ -42,7 +44,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -54,7 +56,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | There is no one banned in this server.`
+                                `<a:Cross:1265733965180960849> | There is no one banned in this server.`
                             )
                     ]
                 })
@@ -69,7 +71,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.tick} | Successfully *Unbanned* \`${i}\` users from the server.`
+                                `<a:Check:1265733979085078610> | Successfully *Unbanned* \`${i}\` users from the server.`
                             )
                     ]
                 })

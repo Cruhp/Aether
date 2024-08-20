@@ -1,3 +1,5 @@
+
+
 const { MessageEmbed } = require('discord.js')
 const { getSettingsar } = require('../../models/autorole')
 
@@ -5,15 +7,15 @@ module.exports = {
     name: 'autorole',
     aliases: ['ar'],
     category: 'welcomer',
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
-        if (message.guild.memberCount < 30) {
+        if (message.guild.memberCount < 0) {
             return message.channel.send({
                 embeds: [
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | Your Server Doesn't Meet My 30 Member Criteria`
+                            `<:S_cross:1254667028711735388> | Your Server Doesn't Meet My 5 Member Criteria`
                         )
                 ]
             })
@@ -37,7 +39,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<:S_cross:1254667028711735388> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -110,39 +112,39 @@ async function addAutoRole({ guild, client }, role) {
     const settings = await getSettingsar(guild)
     if (role) {
         if (!guild.me.permissions.has('MANAGE_ROLES'))
-            return `${client.emoji.cross} | I don't have the \`MANAGE_ROLES\` permission`
+            return `<:S_cross:1254667028711735388> | I don't have the \`MANAGE_ROLES\` permission`
         if (guild.me.roles.highest.position < role.position)
-            return `${client.emoji.cross} | I don't have the permissions to assign this role`
+            return `<:S_cross:1254667028711735388> | I don't have the permissions to assign this role`
         if (role.managed)
-            return `${client.emoji.cross} | This role is managed by an integration.`
+            return `<:S_cross:1254667028711735388> | This role is managed by an integration.`
     }
     if (!role) {
         settings.autorole = []
         await settings.save()
-        return `${client.emoji.tick} | Autorole module was successfully disabled.`
+        return `<:icons8tick1001:1254666723718598656> | Autorole module was successfully disabled.`
     }
     if (settings.autorole.includes(role.id))
-        return `${client.emoji.cross} | This role is already present in the autorole config.`
+        return `<:S_cross:1254667028711735388> | This role is already present in the autorole config.`
     if (settings.autorole.length == 10)
-        return `${client.emoji.cross} | Maximum 10 roles can be set for Auto Roles.`
+        return `<:S_cross:1254667028711735388> | Maximum 10 roles can be set for Auto Roles.`
     else settings.autorole.push(role.id)
     await settings.save()
-    return `${client.emoji.tick} | Successfully **added** <@&${role.id}> to Autorole Config.`
+    return `<:icons8tick1001:1254666723718598656> | Successfully **added** <@&${role.id}> to Autorole Config.`
 }
 
 async function removeAutoRole({ guild, client }, role) {
     const settings = await getSettingsar(guild)
     if (role) {
         if (!guild.me.permissions.has('MANAGE_ROLES'))
-            return `${client.emoji.cross} | I don't have the \`MANAGE_ROLES\` permission`
+            return `<:icons_cross:1245257113824137298> | I don't have the \`MANAGE_ROLES\` permission`
     }
     if (!settings.autorole.includes(role.id))
-        return `${client.emoji.cross} | This role is not present in the autorole config.`
+        return `<:icons_cross:1245257113824137298> | This role is not present in the autorole config.`
     if (settings.autorole.length == 0)
-        return `${client.emoji.cross} | There are no Autoroles in my config.`
+        return `<:icons_cross:1245257113824137298> | There are no Autoroles in my config.`
     else settings.autorole = settings.autorole.filter((r) => r !== role.id)
     await settings.save()
-    return `${client.emoji.tick} | Successfully **removed** <@&${role.id}> from Autorole Config.`
+    return `<:IconTick:1245261305561223199> | Successfully **removed** <@&${role.id}> from Autorole Config.`
 }
 
 async function listAutoRole({ guild, client }) {
@@ -150,7 +152,7 @@ async function listAutoRole({ guild, client }) {
     if (settings.autorole.length == 0)
         return 'There are no Autoroles available for this server.'
     let roles = settings.autorole
-        .map((role) => `${client.emoji.dot} <@&${role}> (${role})`)
+        .map((role) => `<:stolen_emoji:1245702815737843772> <@&${role}> (${role})`)
         .join('\n')
     roles =
         `**Auto-Role list for ${guild.name} - ${settings.autorole.length}\n\n` +

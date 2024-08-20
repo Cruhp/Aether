@@ -1,9 +1,9 @@
 const { Message, Client, MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'kick',
-    aliases: [],
+    aliases: ['stfu'],
     category: 'mod',
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
         if (!message.member.permissions.has('KICK_MEMBERS')) {
             return message.channel.send({
@@ -11,7 +11,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Kick Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Kick Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -27,7 +27,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | Please Provide Valid user ID or Mention Member.`
+                                `<a:Cross:1265733965180960849> | Please Provide Valid user ID or Mention Member.`
                             )
                     ]
                 })
@@ -36,10 +36,10 @@ module.exports = {
         let rea = args.slice(1).join(' ') || 'No Reason Provided'
         rea = `${message.author.tag} (${message.author.id}) | ` + rea
         const kaalo = new MessageEmbed()
-            .setDescription(`${client.emoji.cross} | User Not Found`)
+            .setDescription(`<a:Cross:1265733965180960849> | User Not Found`)
             .setColor(client.color)
         const teddy = new MessageEmbed()
-            .setDescription(`${client.emoji.cross} | Mention the user first`)
+            .setDescription(`<a:Cross:1265733965180960849> | Mention the user first`)
             .setColor(client.color)
         if (!user) return message.channel.send({ embeds: [teddy] })
         if (user === undefined)
@@ -51,7 +51,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You can't kick me.`
+                            `<a:Cross:1265733965180960849> | You can't kick me.`
                         )
                 ]
             })
@@ -62,7 +62,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I can't kick the owner of this server.`
+                            `<a:Cross:1265733965180960849> | I can't kick the owner of this server.`
                         )
                 ]
             })
@@ -72,7 +72,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -81,7 +81,7 @@ module.exports = {
         if (!user.kickable) {
             const embed = new MessageEmbed()
                 .setDescription(
-                    `${client.emoji.cross} |  My highest role is below **<@${user.id}>** `
+                    `<a:Cross:1265733965180960849> |  My highest role is below **<@${user.id}>** `
                 )
                 .setColor(client.color)
             return message.channel.send({ embeds: [embed] })
@@ -102,7 +102,7 @@ module.exports = {
 
         const done = new MessageEmbed()
             .setDescription(
-                `${client.emoji.tick} | Successfully kicked **${user.user.tag}** from the server.`
+                `<a:Check:1265733979085078610> | Successfully kicked **${user.user.tag}** from the server.`
             )
             .setColor(client.color)
         return message.channel.send({ embeds: [done] })

@@ -4,7 +4,7 @@ module.exports = {
     name: 'mediachannel',
     aliases: ['media'],
     category: 'mod',
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_GUILD')) {
             return message.channel.send({
@@ -12,7 +12,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`MANAGE SERVER\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`MANAGE SERVER\` permissions to use this command.`
                         )
                 ]
             });
@@ -23,7 +23,7 @@ module.exports = {
                     embed
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Administrator\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I don't have \`Administrator\` permissions to execute this command.`
                         )
                 ]
             })
@@ -35,7 +35,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -50,19 +50,19 @@ module.exports = {
 
             .addFields([
                 {
-                    name: `__**media**__`,
+                    name: `__**Media**__`,
                     value: `Configures the media only channels !`
                 },
                 {
-                    name: `__**media Set**__`,
+                    name: `__**Media Set**__`,
                     value: `Setup media only channel in server`
                 },
                 {
-                    name: `__**media reset**__`,
+                    name: `__**Media Reset**__`,
                     value: `Disable media only channels configured in server`
                 },
                 {
-                    name: `__**media View**__`,
+                    name: `__**Media View**__`,
                     value: `Shows the media only channels`
                 }
             ])
@@ -79,7 +79,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | Oops! It seems there was an issue. Please make sure to provide a valid channel for the media configuration.`
+                                `<a:Cross:1265733965180960849> | Oops! It seems there was an issue. Please make sure to provide a valid channel for the media configuration.`
                             )
                     ]
                 })
@@ -89,7 +89,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | You cannot add any voice channels as media channel `
+                                `<a:Cross:1265733965180960849> | You cannot add any voice channels as media channel `
                             )
                     ]
                 })
@@ -103,7 +103,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.tick} | Successfully Added ${channel} As Media Only Channel`
+                                `<a:Check:1265733979085078610>| Successfully Added ${channel} As Media Only Channel`
                             )
                     ]
                 })
@@ -116,7 +116,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.tick} | There Is No Media Only Channel Configuration In This Server.!`
+                                `<a:Cross:1265733965180960849> | There Is No Media Only Channel Configuration In This Server.!`
                             )
                     ]
                 })
@@ -127,7 +127,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.tick} | Successfully Disabled Media Only Configuration.!`
+                                `<a:Check:1265733979085078610> | Successfully Disabled Media Only Configuration.!`
                             )
                     ]
                 })
@@ -140,7 +140,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | No Media Only configured is Set.!`
+                                `<a:Cross:1265733965180960849> | No Media Only configured is Set.!`
                             )
                     ]
                 })

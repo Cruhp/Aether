@@ -1,3 +1,5 @@
+
+
 const {
     MessageEmbed,
     Message,
@@ -9,9 +11,9 @@ const {
 
 module.exports = {
     name: 'ignore',
-    aliases: [],
+    aliases: ['ig'],
     category: 'mod',
-    premium: true,
+    premium: false,
     run: async (client, message, args) => {
         let option = args[0]
         let prefix = message.guild.prefix || '&'
@@ -22,7 +24,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Administrator\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Administrator\` permissions to use this command.`
                         )
                 ]
             })
@@ -33,7 +35,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have \`Administrator\` permissions to execute this command.`
+                            `<a:Cross:1265733965180960849> | I don't have \`Administrator\` permissions to execute this command.`
                         )
                 ]
             })
@@ -48,7 +50,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -164,7 +166,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.tick} | Success! ${channel} has been successfully added to my ignore list.`
+                                                `<a:Check:1265733979085078610> | Success! ${channel} has been successfully added to my ignore list.`
                                             )
                                     ]
                                 })
@@ -174,7 +176,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.cross} | Oh no! It looks like ${channel} is already in my ignore list.`
+                                                `<a:Cross:1265733965180960849> | Oh no! It looks like ${channel} is already in my ignore list.`
                                             )
                                     ]
                                 })
@@ -186,7 +188,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            `${client.emoji.cross} | Oops! It seems there was an issue. Please make sure to provide a valid channel for the ignore list.`
+                                            `<a:Cross:1265733965180960849> | Oops! It seems there was an issue. Please make sure to provide a valid channel for the ignore list.`
                                         )
                                 ]
                             })
@@ -237,7 +239,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.tick} | Success! ${channel} has been successfully removed from my ignore list.`
+                                                `<a:Check:1265733979085078610> | Success! ${channel} has been successfully removed from my ignore list.`
                                             )
                                     ]
                                 })
@@ -247,7 +249,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                ` ${client.emoji.cross} | Oops! It appears that ${channel} is not on my ignore list.`
+                                                `<a:Cross:1265733965180960849>| Oops! It appears that ${channel} is not on my ignore list.`
                                             )
                                     ]
                                 })
@@ -259,7 +261,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            ` ${client.emoji.cross} | Oops! It seems there was an issue. Please make sure to provide a valid channel.`
+                                            `<a:Cross:1265733965180960849> | Oops! It seems there was an issue. Please make sure to provide a valid channel.`
                                         )
                                 ]
                             })
@@ -313,7 +315,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            `${client.emoji.cross} | Oops! It seems like there's no designated ignore channel set up in this server. No worries, though! You can easily configure one to enhance your experience.`
+                                            `<a:Cross:1265733965180960849> | Oops! It seems like there's no designated ignore channel set up in this server. No worries, though! You can easily configure one to enhance your experience.`
                                         )
                                 ]
                             })
@@ -438,7 +440,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.tick} | Success! The ${role} role has been successfully added to my ignore bypass list.`
+                                                `<a:Check:1265733979085078610> | Success! The ${role} role has been successfully added to my ignore bypass list.`
                                             )
                                     ]
                                 })
@@ -448,7 +450,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.cross} | Oops! It appears that ${role} is already in my ignore bypass list.`
+                                                `<a:Cross:1265733965180960849> | Oops! It appears that ${role} is already in my ignore bypass list.`
                                             )
                                     ]
                                 })
@@ -460,7 +462,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            `${client.emoji.cross} | Oops! It seems there was an issue. Please ensure you've provided a valid role for the ignore bypass list.`
+                                            `<a:Cross:1265733965180960849> | Oops! It seems there was an issue. Please ensure you've provided a valid role for the ignore bypass list.`
                                         )
                                 ]
                             })
@@ -510,7 +512,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                `${client.emoji.tick} | Success! The ${role} has been successfully removed from my ignore bypass list.`
+                                                `<a:Check:1265733979085078610> | Success! The ${role} has been successfully removed from my ignore bypass list.`
                                             )
                                     ]
                                 })
@@ -520,7 +522,7 @@ module.exports = {
                                         new MessageEmbed()
                                             .setColor(client.color)
                                             .setDescription(
-                                                ` ${client.emoji.cross} | Oops! It appears that the ${role} is not on my ignore bypass list.`
+                                                `<a:Cross:1265733965180960849> | Oops! It appears that the ${role} is not on my ignore bypass list.`
                                             )
                                     ]
                                 })
@@ -532,7 +534,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            ` ${client.emoji.cross} | Oops! It seems there was an issue. Please make sure to provide a valid role.`
+                                            ` <:stolen_emoji:1249318563437871194> | Oops! It seems there was an issue. Please make sure to provide a valid role.`
                                         )
                                 ]
                             })
@@ -585,7 +587,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setColor(client.color)
                                         .setDescription(
-                                            `${client.emoji.cross} | Oops! It seems like there's no designated ignore bypass role set up in this server. No worries, though! You can easily configure one to enhance your experience.`
+                                            `<a:Cross:1265733965180960849> | Oops! It seems like there's no designated ignore bypass role set up in this server. No worries, though! You can easily configure one to enhance your experience.`
                                         )
                                 ]
                             })

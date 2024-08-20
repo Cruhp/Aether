@@ -3,7 +3,7 @@ module.exports = {
     name: 'prefix',
     aliases: ['setprefix'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     /**
      *
@@ -22,7 +22,7 @@ module.exports = {
             return message.channel.send({
                 embeds: [
                     new MessageEmbed()
-                        .setColor(`00e3ff`)
+                        .setColor(`000000`)
                         .setDescription(`You didn't provided the new prefix.`)
                 ]
             })
@@ -30,7 +30,7 @@ module.exports = {
         if (args[1]) {
             const embed = new MessageEmbed()
                 .setDescription('You can not set prefix a double argument')
-                .setColor('00e3ff')
+                .setColor('000000')
             return message.channel.send({ embeds: [embed] })
         }
         if (args[0].length > 3) {
@@ -38,14 +38,14 @@ module.exports = {
                 .setDescription(
                     'You can not send prefix more than 3 characters'
                 )
-                .setColor('00e3ff')
+                .setColor('000000')
             return message.channel.send({ embeds: [embed] })
         }
         if (args.join('') === '&') {
             client.db.delete(`prefix_${message.guild.id}`)
             const embed = new MessageEmbed()
                 .setDescription('Reseted Prefix')
-                .setColor('00e3ff')
+                .setColor('000000')
             return await message.channel.send({ embeds: [embed] })
         }
 
@@ -53,7 +53,7 @@ module.exports = {
         client.util.setPrefix(message, client)
         const embed = new MessageEmbed()
             .setDescription(`New Prefix For This Server Is ${args[0]}`)
-            .setColor('00e3ff')
+            .setColor('000000')
         await message.channel.send({ embeds: [embed] })
     }
 }

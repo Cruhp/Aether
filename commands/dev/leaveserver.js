@@ -1,9 +1,10 @@
+
 const { MessageEmbed } = require('discord.js')
 this.config = require(`${process.cwd()}/config.json`)
 module.exports = {
     name: `leaveserver`,
-    category: `owner`,
-    aliases: [`leaveg`, `gleave`],
+    category: `Owner`,
+    aliases: [`gl`, `gleave`],
     description: `Leaves A Guild`,
     run: async (client, message, args) => {
         if (!this.config.admin.includes(message.author.id)) return
@@ -14,7 +15,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't provided the server Id.`
+                            `<a:Cross:1265733965180960849> | You didn't provided the server Id.`
                         )
                 ]
             })
@@ -27,7 +28,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't provided a valid server Id.`
+                            `<a:Cross:1265733965180960849> | You didn't provided a valid server Id.`
                         )
                 ]
             })
@@ -38,7 +39,7 @@ module.exports = {
                 new MessageEmbed()
                     .setColor(client.color)
                     .setDescription(
-                        `${client.emoji.tick} | Successfully left **${name} (${id})**.`
+                        `<a:Check:1265733979085078610> | Successfully left **${name} (${id})**.`
                     )
             ]
         })

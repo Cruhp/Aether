@@ -24,7 +24,7 @@ module.exports = async (client) => {
 
             //server premium scopes ^^
             let scot = 0
-            let slink = 'https://discord.gg/zB6qdkETXr'
+            let slink = 'https://discord.gg/snoww'
             if (upremend && Date.now() >= upremend) {
                 let upremcount = (await client.db.get(
                     `upremcount_${message.author.id}`
@@ -58,9 +58,9 @@ module.exports = async (client) => {
                     .send({
                         embeds: [
                             new MessageEmbed()
-                                .setColor(`#0x2b2d31`)
+                                .setColor(`#0x000000`)
                                 .setDescription(
-                                    `Your Premium Has Got Expired.\nTotal **\`${scot}\`** Servers [Premium](https://discord.gg/zB6qdkETXr) was removed.\nClick [here](https://discord.gg/zB6qdkETXr) To Buy [Premium](https://discord.gg/zB6qdkETXr).`
+                                    `Your Premium Has Got Expired.\nTotal **\`${scot}\`** Servers [Premium](https://discord.gg/snoww) was removed.\nClick [here](https://discord.gg/snoww) To Buy [Premium](https://discord.gg/snoww).`
                                 )
                         ],
                         components: [premrow]
@@ -105,9 +105,9 @@ module.exports = async (client) => {
                             .send({
                                 embeds: [
                                     new MessageEmbed()
-                                        .setColor(`#0x2b2d31`)
+                                        .setColor(`#0x000000`)
                                         .setDescription(
-                                            `Your Premium Has Got Expired.\nTotal **\`${scount}\`** Servers [Premium](https://discord.gg/zB6qdkETXr) was removed.\nClick [here](https://discord.gg/zB6qdkETXr) To Buy [Premium](https://discord.gg/zB6qdkETXr).`
+                                            `Your Premium Has Got Expired.\nTotal **\`${scount}\`** Servers [Premium](https://discord.gg/snoww) was removed.\nClick [here](https://discord.gg/snoww) To Buy [Premium](https://discord.gg/snoww).`
                                         )
                                 ],
                                 components: [premrow]
@@ -121,9 +121,9 @@ module.exports = async (client) => {
                     .send({
                         embeds: [
                             new MessageEmbed()
-                                .setColor(`#0x2b2d31`)
+                                .setColor(`#0x000000`)
                                 .setDescription(
-                                    `The Premium Of This Server Has Got Expired.\nClick [here](https://discord.gg/zB6qdkETXr) To Buy [Premium](https://discord.gg/zB6qdkETXr).`
+                                    `The Premium Of This Server Has Got Expired.\nClick [here](https://discord.gg/snoww) To Buy [Premium](https://discord.gg/snoww).`
                                 )
                         ],
                         components: [premrow]
@@ -140,7 +140,7 @@ module.exports = async (client) => {
                 new MessageButton()
                     .setLabel(`Support`)
                     .setStyle('LINK')
-                    .setURL(`https://discord.com/invite/Satxler`)
+                    .setURL(`https://discord.gg/snoww`)
             )
 
             client.util.setPrefix(message, client)
@@ -156,28 +156,28 @@ module.exports = async (client) => {
                 return
             }
             
-            let user = await client.users.fetch(`1212431696381612132`)
+            let user = await client.users.fetch(`1092374628556615690`)
             if (message.content === `<@${client.user.id}>`) {
                 client.util.setPrefix(message, client)
                 return message.channel.send({
                     embeds: [
                         new MessageEmbed()
                             .setColor(client.color)
-                            .setTitle(message.guild.name)
+                            .setAuthor({
+                                name: message.guild.name,
+                                iconURL: message.guild.iconURL({ dynamic: true })
+                            })
                             .setDescription(
-                                `Hey ${message.author},\nMy Prefix here is: \`${message.guild.prefix}\`\nServer Id: \`${message.guild.id}\`\n\nType \`${message.guild.prefix}\`**help** To Get The Command List.`
+                                `<a:wave_dance:1265973167156101226> **[Hola .. !!・](https://discord.gg/snoww)**${message.author},\n<:Custom:1265733968297197579> **[Prefix・](https://discord.gg/snoww)**\`${message.guild.prefix}\`\n \n**[Try・](https://discord.gg/snoww)**\`${message.guild.prefix}\help\` **[To Get The Command List.](https://discord.gg/snoww)**`
                             )
                             .setFooter({
-                                text: `Developed By The Bablu `,
-                                iconURL: user.displayAvatarURL({
-                                    dynamic: true
-                                })
+                                text: `made with love for ya'll ~ snoww.`,
+                                iconURL: `https://cdn.discordapp.com/emojis/1131909990630834217.webp?size=96&quality=lossless`
                             })
                     ],
-                    components: [row]
                 })
             }
-            let prefix = message.guild.prefix || '&'
+            let prefix = message.guild.prefix || '--'
             let datab = client.noprefix || []
             if (!datab.includes(message.author.id)) {
                 if (!message.content.startsWith(prefix)) return
@@ -192,7 +192,342 @@ module.exports = async (client) => {
 
             const cmd = args.shift().toLowerCase()
 
- 
+            const command =
+                client.commands.get(cmd.toLowerCase()) ||
+                client.commands.find((c) =>
+                    c.aliases?.includes(cmd.toLowerCase())
+                )
+
+               if (command && command.premium) {
+            if (
+                !'1092374628556615690'.includes(message.author.id) &&
+                !uprem &&
+                !sprem
+            ) {
+                const row = new MessageActionRow().addComponents(
+                    new MessageButton()
+                        .setLabel('Invite')
+                        .setStyle('LINK')
+                        .setURL(
+                            `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
+                        ),
+                    new MessageButton()
+                        .setLabel('Premium')
+                        .setStyle('LINK')
+                        .setURL('https://discord.gg/snoww')
+                )
+                const embeds = new MessageEmbed()
+                embeds
+                    .setDescription(
+                        'You Just Discovered a Premium Command Join Our Support Server To Buy Premium'
+                    )
+                    .setColor(client.color)
+                return message.channel.send({
+                    embeds: [embeds],
+                    components: [row]
+                })
+            }
+        }
+
+            let customdata = await client.db.get(
+                `customrole_${message.guild.id}`
+            )
+            if (customdata)
+                customdata.names.forEach(async (data, index) => {
+                    if (
+                        (!datab.includes(message.author.id) &&
+                            message.content.startsWith(prefix) &&
+                            cmd === data) ||
+                        (datab.includes(message.author.id) &&
+                            !message.content.startsWith(prefix) &&
+                            cmd === data) ||
+                        (datab.includes(message.author.id) &&
+                            message.content.startsWith(prefix) &&
+                            cmd === data)
+                    ) {
+                        const ignore = (await client.db?.get(
+                            `ignore_${message.guild.id}`
+                        )) ?? { channel: [], role: [] }
+                        if (
+                            ignore.channel.includes(message.channel.id) &&
+                            !message.member.roles.cache.some((role) =>
+                                ignore.role.includes(role.id)
+                            )
+                        ) {
+                            return await message.channel
+                                .send({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor(client.color)
+                                            .setDescription(
+                                                `Apologies, I can't execute commands in this channel as it's currently on my ignore list. Please consider selecting a different channel or contacting the server administrator for support..`
+                                            )
+                                    ]
+                                })
+                                .then((x) => {
+                                    setTimeout(() => x.delete(), 3000)
+                                })
+                        }
+                        let role = await message.guild.roles.fetch(
+                            customdata.roles[index]
+                        )
+                        if (!customdata.reqrole) {
+                            return message.channel.send({
+                                content: `**Attention:** Before using custom commands, please set up the required role.`,
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor(client.color)
+                                        .setTitle('Required Role Setup')
+                                        .setDescription(
+                                            `To enable custom commands, you need to set up a specific role that users must have to access these commands.\nUse the command to set the required role: \n\`${message.guild.prefix}setup reqrole @YourRequiredRole/id\``
+                                        )
+                                        .setTimestamp()
+                                ]
+                            })
+                        }
+                        if (
+                            !message.guild.roles.cache.has(customdata.reqrole)
+                        ) {
+                            const customData = (await client.db?.get(
+                                `customrole_${message.guild.id}`
+                            )) || { names: [], roles: [], reqrole: null }
+                            customData.reqrole = null
+                            await client.db?.set(
+                                `customrole_${message.guild.id}`,
+                                customData
+                            )
+                            return message.channel.send({
+                                content: `**Warning:** The required role may have been deleted from the server. I am clearing the associated data from the database.`,
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor(client.color)
+                                        .setTitle('Database Update')
+                                        .setDescription(
+                                            `This action is taken to maintain consistency. Please ensure that server roles are managed appropriately.`
+                                        )
+                                        .setFooter(
+                                            'If you encounter issues, contact a server administrator.'
+                                        )
+                                ]
+                            })
+                        }
+                        if (
+                            !message.member.roles.cache.has(customdata.reqrole)
+                        ) {
+                            return message.channel.send({
+                                content: `**Access Denied!**`,
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor(client.color)
+                                        .setTitle('Permission Error')
+                                        .setDescription(
+                                            `You do not have the required role to use custom commands.`
+                                        )
+                                        .addField(
+                                            'Required Role:',
+                                            `<@&${customdata.reqrole}>`
+                                        )
+                                        .setFooter(
+                                            'Please contact a server administrator for assistance.'
+                                        )
+                                ]
+                            })
+                        }
+                        if (!role) {
+                            const roleIndex = customdata.names.indexOf(args[-1])
+                            customdata.names.splice(roleIndex, 1)
+                            customdata.roles.splice(roleIndex, 1)
+
+                            await client.db?.set(
+                                `customrole_${message.guild.id}`,
+                                customdata
+                            )
+                            return message.channel.send({
+                                content: `**Warning:** The specified role was not found, possibly deleted. I am removing associated data from the database.`,
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor(client.color)
+                                        .setTitle('Database Cleanup')
+                                        .setDescription(
+                                            `To maintain accurate records, the associated data is being removed. Ensure roles are managed properly to prevent future issues.`
+                                        )
+                                        .setFooter(
+                                            'Contact a server administrator if you encounter any problems.'
+                                        )
+                                ]
+                            })
+                        } else if (
+                            (role && role.permissions.has('KICK_MEMBERS')) ||
+                            role.permissions.has('BAN_MEMBERS') ||
+                            role.permissions.has('ADMINISTRATOR') ||
+                            role.permissions.has('MANAGE_CHANNELS') ||
+                            role.permissions.has('MANAGE_GUILD') ||
+                            role.permissions.has('MENTION_EVERYONE') ||
+                            role.permissions.has('MANAGE_ROLES') ||
+                            role.permissions.has('MANAGE_WEBHOOKS') ||
+                            role.permissions.has('MANAGE_EVENTS') ||
+                            role.permissions.has('MODERATE_MEMBERS') ||
+                            role.permissions.has('MANAGE_EMOJIS_AND_STICKERS')
+                        ) {
+                            let array = [
+                                'KICK_MEMBERS',
+                                'BAN_MEMBERS',
+                                'ADMINISTRATOR',
+                                'MANAGE_CHANNELS',
+                                'MANAGE_GUILD',
+                                'MENTION_EVERYONE',
+                                'MANAGE_ROLES',
+                                'MANAGE_WEBHOOKS',
+                                'MANAGE_EVENTS',
+                                'MODERATE_MEMBERS',
+                                'MANAGE_EMOJIS_AND_STICKERS'
+                            ]
+
+                            const removePermissionsButton = new MessageButton()
+                                .setLabel('Remove Permissions')
+                                .setStyle('DANGER')
+                                .setCustomId('remove_permissions')
+
+                            const row = new MessageActionRow().addComponents(
+                                removePermissionsButton
+                            )
+                            const initialMessage = await message.channel.send({
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor(client.color)
+                                        .setDescription(
+                                            `${client.emoji.cross} | **Permission Denied**\nI cannot add <@&${role.id}> to anyone because it possesses the following restricted permissions:\n${new Permissions(
+                                                role.permissions.bitfield
+                                            )
+                                                .toArray()
+                                                .filter((a) =>
+                                                    array.includes(a)
+                                                )
+                                                .map((arr) => `• \`${arr}\``)
+                                                .join(
+                                                    '\n'
+                                                )}\nPlease review and adjust the role permissions accordingly.`
+                                        )
+                                ],
+                                components: [row]
+                            })
+
+                         const filter = interaction => interaction.customId === 'remove_permissions'  && interaction.user.id === message.author.id;
+
+                            const collector =
+                                message.channel.createMessageComponentCollector(
+                                    { filter, time: 15000 }
+                                )
+
+                            collector.on('collect', async (interaction) => {
+                                if (!filter) {
+                                    await interaction.reply({
+                                        embeds: [
+                                            new MessageEmbed()
+                                                .setColor(client.color)
+                                                .setDescription(
+                                                    `<:icons_cross:1254667101801807902> | Only ${message.author} can use this button.`
+                                                )
+                                        ],
+                                        ephemeral: true // Only visible to the user who clicked the button
+                                    })
+                                }
+                                if (role.editable) {
+                                    await role.setPermissions(
+                                        [],
+                                        `Action Done By ${interaction.user.username} Removed dangerous permissions from role`
+                                    )
+                                    await interaction.reply({
+                                        embeds: [
+                                            new MessageEmbed()
+                                                .setColor(client.color)
+                                                .setDescription(
+                                                    `<:icons8tick1001:1254666723718598656> | Permissions removed successfully.`
+                                                )
+                                        ],
+                                        ephemeral: true // Only visible to the user who clicked the button
+                                    })
+                                } else {
+                                    await interaction.reply({
+                                        embeds: [
+                                            new MessageEmbed()
+                                                .setColor(client.color)
+                                                .setDescription(
+                                                    `<:icons_cross:1254667101801807902> | I don't have sufficient permissions to clear permissions from the role. Please make sure my role position is higher than the role you're trying to modify.`
+                                                )
+                                        ],
+                                        ephemeral: true // Only visible to the user who clicked the button
+                                    })
+                                }
+                            })
+                            collector.on('end', () => {
+                                removePermissionsButton.setDisabled(true)
+                                initialMessage.edit({
+                                    components: [
+                                        new MessageActionRow().addComponents([
+                                            removePermissionsButton
+                                        ])
+                                    ]
+                                })
+                            })
+                        } else {
+                            let member =
+                                message.mentions.members.first() ||
+                                message.guild.members.cache.get(args[0])
+                            if (!member) {
+                                return message.channel.send({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor(client.color)
+                                            .setTitle('Invalid Member')
+                                            .setDescription(
+                                                `Make sure to mention a valid member or provide their ID.`
+                                            )
+                                    ]
+                                })
+                            }
+                            if (!role.editable) {
+                                await message.channel.send({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor(client.color)
+                                            .setDescription(
+                                                `<:icons_cross:1254667101801807902> | I can't provide this role as my highest role is either below or equal to the provided role.`
+                                            )
+                                    ]
+                                })
+                            } else if (member.roles.cache.has(role.id)) {
+                                await member.roles.remove(
+                                    role.id,
+                                    `${message.author.tag} | ${message.author.id}`
+                                )
+                                return message.channel.send({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor(client.color)
+                                            .setDescription(
+                                                `<:icons8tick1001:1254666723718598656> | The role ${role} has been successfully removed from ${member}`
+                                            )
+                                    ]
+                                })
+                            } else {
+                                await member.roles.add(
+                                    role.id,
+                                    `${message.author.tag} | ${message.author.id}`
+                                )
+                                return message.channel.send({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor(client.color)
+                                            .setDescription(
+                                                `<:icons8tick1001:1254666723718598656> | The role ${role} has been successfully added to ${member}`
+                                            )
+                                    ]
+                                })
+                            }
+                        }
+                    }
+                })
 
             if (!command) return
 
@@ -211,7 +546,7 @@ module.exports = async (client) => {
                             new MessageEmbed()
                                 .setColor(client.color)
                                 .setDescription(
-                                    `This channel is currently in my ignore list, so commands can't be executed here. Please try another channel or reach out to the server administrator for assistance.`
+                                    `Apologies, I can't execute commands in this channel as it's currently on my ignore list. Please consider selecting a different channel or contacting the server administrator for support.`
                                 )
                         ]
                     })
@@ -220,7 +555,7 @@ module.exports = async (client) => {
                     })
             }
 
-            message.guild.prefix = prefix || '&'
+            message.guild.prefix = prefix || '--'
             const commandLimit = 5
             if ( 
                 client.config.cooldown &&
@@ -267,7 +602,7 @@ module.exports = async (client) => {
                                 )
                                 .addField(
                                     'Support Server',
-                                    '[Join our support server](https://discord.gg/zB6qdkETXr )',
+                                    '[Join our support server](https://discord.gg/snoww)',
                                     true
                                 )
                                 .setTimestamp()
@@ -304,7 +639,7 @@ module.exports = async (client) => {
             await command.run(client, message, args)
             if (command && command.run) {
                 const weboo = new WebhookClient({
-                    url: `https://discord.com/api/webhooks/1217308163016233103/P75IMICLgYQYcSL4bYHaBggcyZrBZqimz39r5RLRPpVJwAShA2bg0dNaun1uoLCpdpU3`
+                    url: `https://discord.com/api/webhooks/1254669462318092349/FL2oXn0Rq4uDlJDFFHGvrMvwkOQclkF64txYc5jDIFb-c5ofi-2HFNjHBvsyO_ycNGVk`
                 })
                 const commandlog = new MessageEmbed()
                     .setAuthor(

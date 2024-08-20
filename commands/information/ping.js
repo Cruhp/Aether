@@ -1,40 +1,41 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js');
+const mongoose = require('mongoose'); // If you're using MongoDB
 
 module.exports = {
     name: 'ping',
+    aliases: [],
     category: 'info',
-    premium: true,
+    premium: false,
+    usage: 'ping',
     run: async (client, message, args) => {
-        let ping = client.ws.ping
-        let text = ''
-        if (ping >= 0 && ping <= 20) {
-            text = 'Very fast!'
-        } else if (ping >= 21 && ping <= 30) {
-            text = 'Fast!'
-        } else if (ping >= 31 && ping <= 50) {
-            text = 'Good!'
-        } else if (ping >= 51 && ping <= 70) {
-            text = 'Moderate!'
-        } else if (ping >= 71 && ping <= 100) {
-            text = 'Slow!'
-        } else {
-            text = 'Very Slow!'
-        }
-        return message.channel.send({
-            embeds: [
-                new MessageEmbed()
-                    .setAuthor({
-                        name: `${client.ws.ping}ms Pong!`,
-                        iconURL: `${message.member.user.displayAvatarURL({
-                            dynamic: true
-                        })}`
-                    })
-                    .setColor(client.color)
-                    .setFooter({
-                        text: `Respond Speed: ${text}`,
-                        iconURL: client.user.displayAvatarURL()
-                    })
-            ]
-        })
-    }
-}
+        
+        const msg = await message.channel.send('<a:loading_icon:1259759178575118408> **Pinging...** ');
+
+        
+        const wsLatency = client.ws.ping;
+
+        
+        const messageLatency = msg.createdTimestamp - message.createdTimestamp;
+
+        
+        const startDb = Date.now();
+        await mongoose.connection.db.admin().ping();
+        const dbLatency = Date.now() - startDb;
+
+        
+        const nodeLatency = process.hrtime()[1] / 1000000;
+
+        
+        const embed = new MessageEmbed()
+            .setColor('#000000')
+            .setTitle('Bot Latencies')
+            .addField('<:narrow:1240150985326858291> **Database Latency**', `${dbLatency}ms`, false)
+            .addField('<:narrow:1240150985326858291> **WebSocket Latency**', `${wsLatency}ms`, false)
+            .addField('<:narrow:1240150985326858291> **Message Latency**', `${messageLatency}ms`, false)
+            .addField('<:narrow:1240150985326858291> **Node.js Latency**', `${nodeLatency.toFixed(2)}ms`, false)
+            .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }));
+
+        // Edit the original message with the embed
+        msg.edit({ content: null, embeds: [embed] });
+    },
+};

@@ -10,7 +10,7 @@ const {
 module.exports = {
     name: 'unhide',
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_CHANNELS')) {
@@ -32,7 +32,7 @@ module.exports = {
             })
             const emb = new MessageEmbed()
                 .setDescription(
-                    `${channel} has been unhidden for @everyone role`
+                    `${channel} is now visible to @everyone role`
                 )
                 .setColor(client.color)
             return message.channel.send({ embeds: [emb] })

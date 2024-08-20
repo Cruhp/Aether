@@ -1,8 +1,9 @@
+
 const { Message, Client, MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: 'firstmsg',
-    aliases: ['firstmessage'],
+    aliases: ['firstmessage','fm'],
     category: 'info',
     run: async (client, message, args) => {
         const fetchMessages = await message.channel.messages.fetch({

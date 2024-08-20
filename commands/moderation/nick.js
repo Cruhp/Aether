@@ -1,12 +1,14 @@
+
+
 const {
     MessageEmbed,
 } = require('discord.js');
 
 module.exports = {
     name: 'nick',
-    aliases: [],
+    aliases: ['name'],
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_NICKNAMES')) {
@@ -31,7 +33,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have a higher role than me to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have a higher role than me to use this command.`
                         )
                 ]
             })
@@ -43,7 +45,7 @@ module.exports = {
             try {
                 member = await message.guild.members.fetch(args[0])
             } catch (error) {
-                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | Please Provide a valid member`)]});
+                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | Please Provide a valid member`)]});
 
             }
         }
@@ -51,13 +53,13 @@ module.exports = {
         try {
             if (!name) {
                 await member.setNickname(null);
-                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.tick} | ${member}'s nickname has been successfully removed`)]});
+                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Check:1265733979085078610> | ${member}'s nickname has been successfully removed`)]});
             } else {
                 await member.setNickname(name);
-                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.tick} | ${member}'s nickname has been successfully changed to ${name}`)]});
+                return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Check:1265733979085078610> | ${member}'s nickname has been successfully changed to ${name}`)]});
             }
         } catch (err) {
-            return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`${client.emoji.cross} | I may not have sufficient permissions or my highest role may not be above or the same as ${member}.`)]});
+            return message.channel.send({ embeds: [new MessageEmbed().setColor(client.color).setDescription(`<a:Cross:1265733965180960849> | I may not have sufficient permissions or my highest role may not be above or the same as ${member}.`)]});
         }
     }
 };

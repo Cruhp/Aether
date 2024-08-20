@@ -1,405 +1,218 @@
-const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
-const moment = require('moment')
-const os = require('os')
+/*const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
+const moment = require('moment');
+const os = require('os');
+
 module.exports = {
     name: 'stats',
     category: 'info',
-    aliases: ['botinfo', 'bi'],
+    aliases: ['botinfo', 'bi', 'st'],
     usage: 'stats',
     run: async (client, message, args) => {
+        // Create initial buttons
         let button = new MessageButton()
             .setLabel('Team Info')
             .setCustomId('team')
-            .setStyle('SECONDARY')
+            .setStyle('SECONDARY');
+        
         let button1 = new MessageButton()
             .setLabel('General Info')
             .setCustomId('general')
             .setStyle('SECONDARY')
-            .setDisabled(true)
+            .setDisabled(true);
+        
         let button2 = new MessageButton()
             .setLabel('System Info')
             .setCustomId('system')
-            .setStyle('SECONDARY')
+            .setStyle('SECONDARY');
+        
         let button3 = new MessageButton()
-            .setLabel('Partners ')
+            .setLabel('Partners')
             .setCustomId('partners')
-            .setStyle('SECONDARY')
+            .setStyle('SECONDARY');
+        
+        // Create action row with initial buttons
         const row = new MessageActionRow().addComponents([
             button,
             button1,
             button2,
             button3
-        ])
-        const uptime = Math.round(Date.now() - client.uptime)
-        let guilds1 = client.guilds.cache.size
-        let member1 = client.guilds.cache.reduce((x, y) => x + y.memberCount, 0)
+        ]);
+        
+        // Calculate bot uptime
+        const uptime = moment.duration(client.uptime).humanize();
+        
+        // Fetch necessary guild and user counts
+        const guildsCount = client.guilds.cache.size;
+        const totalMembersCount = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0);
+        const cachedUsersCount = client.users.cache.size;
+        const channelsCount = client.channels.cache.size;
+
+        // Create main embed with bot information
         const embed = new MessageEmbed()
-            .setColor(client.color)
-            .setAuthor({
-                name: 'BITZXIER Informations',
-                iconURL: (
-                    await client.guilds
-                        .fetch('873228243757596672')
-                        .catch(() => null)
-                )?.members?.cache
-                    ?.get('1180425876798701588')
-                    ?.user?.displayAvatarURL({ dynamic: true })
-            })
+            .setColor('#000000') // Black color
+            .setAuthor(`${client.user.username} Information`, client.user.displayAvatarURL({ dynamic: true }))
             .setDescription(
-                `**__General Informations__**\nBot's Mention: <@!${
-                    client.user.id
-                }>\nBot's Tag: ${
-                    client.user.tag
-                }\nBot's Version: 1.0.0\nTotal Servers: ${guilds1}\nTotal Users: ${member1} (${
-                    client.users.cache.size
-                } Cached)\nTotal Channels: ${
-                    client.channels.cache.size
-                }\nLast Rebooted: ${moment(uptime).fromNow()}`
+                `**__General Information__**\n` +
+                `Bot's Mention: <@!${client.user.id}>\n` +
+                `Bot's Tag: ${client.user.tag}\n` +
+                `Bot's Version: 1.0.0\n` +
+                `Total Servers: ${guildsCount}\n` +
+                `Total Users: ${totalMembersCount} (${cachedUsersCount} Cached)\n` +
+                `Total Channels: ${channelsCount}\n` +
+                `Last Rebooted: ${uptime}`
             )
             .setThumbnail(client.user.displayAvatarURL())
-            .setFooter({
-                text: `Requested By ${message.author.tag}`,
-                iconURL: message.author.displayAvatarURL({ dynamic: true })
-            })
-        let msg = await message.channel.send(
-            { embeds: [embed], components: [row] },
-            message
-        )
+            .setFooter(`Requested By ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }));
+        
+        // Send the initial embed with action row
+        let msg = await message.channel.send({ embeds: [embed], components: [row] });
 
+        // Create a message component collector to handle button interactions
         const collector = msg.createMessageComponentCollector({
-            filter: (i) => i.user && i.isButton(),
-            time: 60000
-        })
+            filter: (i) => i.user.id === message.author.id && i.isButton(),
+            time: 60000 // Timeout after 1 minute
+        });
+
+        // Handle button interactions
         collector.on('collect', async (i) => {
-            if (i.user.id !== message.author.id)
-                return i.reply({
-                    content: "> This isn't for you.",
-                    ephemeral: true
-                })
-            if (i.isButton()) {
-                if (i.customId == 'partners') {
-                    i.deferUpdate()
-                    const em = new MessageEmbed()
-                        .setColor(client.color)
-                        .setAuthor({
-                            name: "BITZXIER Partner's",
-                            iconURL: client.user.displayAvatarURL()
-                        })
+            // Handle different button interactions
+            switch (i.customId) {
+                case 'partners':
+                    i.deferUpdate(); // Defer the interaction to prevent timeout
+                    const partnersEmbed = new MessageEmbed()
+                        .setColor('#000000') // Black color
+                        .setTitle("tutu. Partner's")
                         .setDescription(
-                            `RudraCloud was born in 2023 with the idea of providing the latest generation products to customers. We provide **Virtual Private Servers**, **Panels**, Virtual Dedicated Servers and Dedicated Servers [click here to see website](https://rudracloud.xyz/)\n[discord server](https://discord.gg/Nhxx5MZ59B)`
+                            `MoonHosting was born in 2024 with the idea of providing the latest generation products to customers. We provide **Virtual Private Servers**, **Panels**, Virtual Dedicated Servers and Dedicated Servers.\n\n[Visit Website](https://panel.moonhost.xyz/)\n[Join Discord](https://discord.gg/coderz)`
                         )
-                        .setFooter({
-                            text: `© Powered By RudraCloud`,
-                            iconURL:
-                                'https://cdn.discordapp.com/icons/1089579780850077858/a_5111711e34f6d58323baf36c0b29b773.gif'
-                        })
-                        .setImage(
-                            `https://media.discordapp.net/attachments/1152257911033168042/1171351266149015592/standard_1.gif?width=585&height=75`
-                        )
-                    button = button.setDisabled(false)
-                    button1 = button1.setDisabled(false)
-                    button2 = button2.setDisabled(false)
-                    button3 = button3.setDisabled(true)
+                        .setFooter("© Powered By MoonHosting", 'https://cdn.discordapp.com/banners/1233772092894216313/a_89d632e30ffd5270b9a93c35091a19fb.gif?size=4096')
+                        .setImage('https://images-ext-1.discordapp.net/external/IWQv4-VcMLSQKCo8of4v_kpASyR5qKismo64DQGdXnQ/%3Fsize%3D4096/https/cdn.discordapp.com/banners/1233772092894216313/a_89d632e30ffd5270b9a93c35091a19fb.gif');
+                    button1.setDisabled(false);
+                    button2.setDisabled(false);
+                    button3.setDisabled(false);
+                    button.setDisabled(true);
                     const row1 = new MessageActionRow().addComponents([
                         button,
                         button1,
                         button2,
                         button3
-                    ])
-                    if (msg)
-                        return msg.edit(
-                            { embeds: [em], components: [row1] },
-                            message,
-                            msg
-                        )
-                }
-                if (i.customId == 'team') {
-                    i.deferUpdate()
-                    let status = {
-                        dnd: '<:dnd:1181484398097485834>',
-                        idle: '<:idle:1181484312265228439>',
-                        online: '<:online:1181479231872565361>',
-                        offline: '<:offline:1181479232015188019>'
-                    }
-                    const em = new MessageEmbed()
+                    ]);
+                    await msg.edit({ embeds: [partnersEmbed], components: [row1] });
+                    break;
+                case 'team':
+                    i.deferUpdate(); // Defer the interaction to prevent timeout
+                    const teamEmbed = new MessageEmbed()
+                        .setColor('#000000') // Black color
+                        .setTitle("tutu. Team Information")
                         .setDescription(
-                            `**__Developers__**\n[\`1\`] ${
-                                status[
-                                    client.guilds.cache
-                                        .get('873228243757596672')
-                                        ?.members?.cache?.get(
-                                            '1180425876798701588'
-                                        )?.presence?.status || 'offline'
-                                ]
-                            }  [Terminator </>](https://discord.gg/users/1180425876798701588)\n\n**__Core Team__**\n[\`1\`] ${
-                                status[
-                                    client.guilds.cache
-                                        .get('873228243757596672')
-                                        ?.members?.cache?.get(
-                                            '259176352748404736'
-                                        )?.presence?.status || 'offline'
-                                ]
-                            }  [sumittt.](https://discord.gg/users/259176352748404736)\n\n**__Contributors __**\n[\`1\`] ${
-                                status[
-                                    client.guilds.cache
-                                        .get('873228243757596672')
-                                        ?.members?.cache?.get(
-                                            '1111192187628163102'
-                                        )?.presence?.status || 'offline'
-                                ]
-                            }  [alone.fyy](https://discord.gg/users/1111192187628163102)`
+                            `**__Developer__**\n` +
+                            `Status: Dnd\n` +
+                            `@snoww. </> - [Profile](https://discord.gg/users/1092374628556615690)\n\n` +
+                            `**__Core Team__**\n` +
+                            `Status: Online\n` +
+                            `no one - [Profile](https://discord.gg/users/1092374628556615690)\n\n` +
+                            `**__Contributors__**\n` +
+                            `Status: Online\n` +
+                            `no one - [Profile](https://discord.gg/users/1092374628556615690)`
                         )
-                        .setColor(client.color)
-                        .setAuthor({
-                            name: 'BITZXIER Informations',
-                            iconURL: client.guilds.cache
-                                .get('873228243757596672')
-                                ?.members?.cache?.get('1180425876798701588')
-                                ?.user?.displayAvatarURL({ dynamic: true })
-                        })
-                        .setFooter({
-                            text: `Requested By ${message.author.tag}`,
-                            iconURL: message.author.displayAvatarURL({
-                                dynamic: true
-                            })
-                        })
-                        .setThumbnail(client.user.displayAvatarURL())
-                    button = button.setDisabled(true)
-                    button1 = button1.setDisabled(false)
-                    button2 = button2.setDisabled(false)
-                    button3 = button3.setDisabled(false)
-                    const row1 = new MessageActionRow().addComponents([
+                        .setFooter(`Requested By ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+                        .setThumbnail(client.user.displayAvatarURL());
+                    button1.setDisabled(false);
+                    button2.setDisabled(false);
+                    button3.setDisabled(false);
+                    button.setDisabled(false);
+                    const row2 = new MessageActionRow().addComponents([
                         button,
                         button1,
                         button2,
                         button3
-                    ])
-                    if (msg)
-                        return msg.edit(
-                            { embeds: [em], components: [row1] },
-                            message,
-                            msg
-                        )
-                }
-                if (i.customId == 'general') {
-                    i.deferUpdate()
-                    let member = client.guilds.cache.reduce(
-                        (x, y) => x + y.memberCount,
-                        0
-                    )
-                    if (member >= 1000 && member < 1000000)
-                        member = (member / 1000).toFixed(1) + 'k'
-                    else if (member >= 1000000)
-                        member = (member / 1000000).toFixed(1) + 'm'
-                    else member1 = member1
-                    let guilds = client.guilds.cache.size
-                    const embed = new MessageEmbed()
-                        .setColor(client.color)
-                        .setAuthor({
-                            name: 'BITZXIER Informations',
-                            iconURL: client.guilds.cache
-                                .get('873228243757596672')
-                                ?.members?.cache?.get('1180425876798701588')
-                                ?.user?.displayAvatarURL({ dynamic: true })
-                        })
+                    ]);
+                    await msg.edit({ embeds: [teamEmbed], components: [row2] });
+                    break;
+                case 'general':
+                    i.deferUpdate(); // Defer the interaction to prevent timeout
+                    const generalEmbed = new MessageEmbed()
+                        .setColor('#000000') // Black color
+                        .setAuthor(`${client.user.username} Information`, client.user.displayAvatarURL({ dynamic: true }))
                         .setDescription(
-                            `**__General Informations__**\nBot's Mention: <@!${
-                                client.user.id
-                            }>\nBot's Tag: ${client.user.tag}\nBot's Version: ${
-                               `1.0.0`
-                            }\nTotal Servers: ${guilds}\nTotal Users: ${member} (${
-                                client.users.cache.size
-                            } Cached)\nTotal Channels: ${
-                                client.channels.cache.size
-                            }\nLast Rebooted: ${moment(uptime).fromNow()}`
+                            `**__General Information__**\n` +
+                            `Bot's Mention: <@!${client.user.id}>\n` +
+                            `Bot's Tag: ${client.user.tag}\n` +
+                            `Bot's Version: 1.0.0\n` +
+                            `Total Servers: ${guildsCount}\n` +
+                            `Total Users: ${totalMembersCount} (${cachedUsersCount} Cached)\n` +
+                            `Total Channels: ${channelsCount}\n` +
+                            `Last Rebooted: ${uptime}`
                         )
                         .setThumbnail(client.user.displayAvatarURL())
-                        .setFooter({
-                            text: `Requested By ${message.author.tag}`,
-                            iconURL: message.author.displayAvatarURL({
-                                dynamic: true
-                            })
-                        })
-                    button = button.setDisabled(false)
-                    button1 = button1.setDisabled(true)
-                    button2 = button2.setDisabled(false)
-                    button3 = button3.setDisabled(false)
-                    const row1 = new MessageActionRow().addComponents([
+                        .setFooter(`Requested By ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }));
+                    button1.setDisabled(true);
+                    button2.setDisabled(false);
+                    button3.setDisabled(false);
+                    button.setDisabled(false);
+                    const row3 = new MessageActionRow().addComponents([
                         button,
                         button1,
                         button2,
                         button3
-                    ])
-                    if (msg)
-                        return msg.edit(
-                            { embeds: [embed], components: [row1] },
-                            message,
-                            msg
+                    ]);
+                    await msg.edit({ embeds: [generalEmbed], components: [row3] });
+                    break;
+                case 'system':
+                    i.deferUpdate(); // Defer the interaction to prevent timeout
+                    await msg.edit({
+                        embeds: [
+                            new MessageEmbed()
+                                .setColor('#000000') // Black color
+                                .setTitle('tutu. System Information')
+                                .setDescription('<a:Loading:1259382146490040350> | Fetching all the resources...')
+                                .setThumbnail(client.user.displayAvatarURL())
+                                .setFooter(`Requested By ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+                        ],
+                        components: []
+                    });
+                    
+                    const totalMemoryBytes = os.totalmem();
+                    const freeMemoryBytes = os.freemem();
+                    const usedMemoryBytes = totalMemoryBytes - freeMemoryBytes;
+                    const totalMemoryGB = (totalMemoryBytes / 1024 / 1024 / 1024).toFixed(2);
+                    const usedMemoryGB = (usedMemoryBytes / 1024 / 1024 / 1024).toFixed(2);
+                    const memoryUsage = `${usedMemoryGB}GB / ${totalMemoryGB}GB`;
+
+                    const cpuModel = os.cpus()[0].model;
+                    const cpuSpeed = os.cpus()[0].speed + ' MHz';
+                    const cpuCores = os.cpus().length;
+                    const cpuUsage = `${Math.round(os.loadavg()[0] * 100)}%`;
+
+                    const systemInfoEmbed = new MessageEmbed()
+                        .setColor('#000000') // Black color
+                        .setTitle('tutu. System Information')
+                        .setDescription(
+                            `**__System Information__**\n` +
+                            `System Latency: ${client.ws.ping}ms\n` +
+                            `Platform: ${os.platform()}\n` +
+                            `Architecture: ${os.arch()}\n` +
+                            `Memory Usage: ${memoryUsage}\n` +
+                            `CPU Model: ${cpuModel}\n` +
+                            `CPU Speed: ${cpuSpeed}\n` +
+                            `CPU Cores: ${cpuCores}\n` +
+                            `CPU Usage: ${cpuUsage}`
                         )
-                }
-                if (i.customId == 'system') {
-                    i.deferUpdate()
-                    if (msg)
-                        msg.edit({
-                            embeds: [
-                                new MessageEmbed()
-                                    .setColor(client.color)
-                                    .setAuthor({
-                                        name: 'BITZXIER Informations',
-                                        iconURL: client.guilds.cache
-                                            .get('873228243757596672')
-                                            ?.members?.cache?.get(
-                                                '1180425876798701588'
-                                            )
-                                            ?.user?.displayAvatarURL({
-                                                dynamic: true
-                                            })
-                                    })
-                                    .setFooter({
-                                        text: `Requested By ${message.author.tag}`,
-                                        iconURL:
-                                            message.author.displayAvatarURL({
-                                                dynamic: true
-                                            })
-                                    })
-                                    .setDescription(
-                                        '<:bitzxier_mainrole:1181290802022977576> | **Fetching** all the **resources**...'
-                                    )
-                            ]
-                        })
-                    const totalMemoryBytes = os.totalmem()
-                    const cpuCount = os.cpus().length
-                    const freeMemoryBytes = os.freemem()
-                    const memoryUsageBytes = totalMemoryBytes - freeMemoryBytes
-
-                    let totalMemoryGB = totalMemoryBytes / (1024 * 1024 * 1024)
-                    let memoryUsageGB = memoryUsageBytes / (1024 * 1024 * 1024)
-
-                    if (
-                        totalMemoryGB >=
-                        totalMemoryBytes / (1024 * 1024 * 1024)
-                    )
-                        totalMemoryGB = totalMemoryGB.toFixed(2) + ' GB'
-                    else
-                        totalMemoryGB =
-                            (totalMemoryBytes / (1024 * 1024)).toFixed(2) +
-                            ' MB'
-
-                    if (
-                        memoryUsageGB >=
-                        memoryUsageBytes / (1024 * 1024 * 1024)
-                    )
-                        memoryUsageGB = memoryUsageGB.toFixed(2) + ' GB'
-                    else
-                        memoryUsageGB =
-                            memoryUsageBytes / (1024 * 1024).toFixed(2) + ' MB'
-
-                    const processors = os.cpus()
-
-                    const cpuUsage1 = os.cpus()[0].times
-                    const startUsage1 =
-                        cpuUsage1.user +
-                        cpuUsage1.nice +
-                        cpuUsage1.sys +
-                        cpuUsage1.irq
-                    let cpuUsage2
-                    setTimeout(async () => {
-                        cpuUsage2 = os.cpus()[0].times
-                        const endUsage1 =
-                            cpuUsage2?.user +
-                            cpuUsage2?.nice +
-                            cpuUsage2?.sys +
-                            cpuUsage2?.irq
-
-                        const totalUsage = endUsage1 - startUsage1
-
-                        let idleUsage = 0
-                        let totalIdle = 0
-
-                        for (let i = 0; i < cpuCount; i++) {
-                            const cpuUsage = os.cpus()[i].times
-                            totalIdle += cpuUsage.idle
-                        }
-
-                        idleUsage =
-                            totalIdle - (cpuUsage2.idle - cpuUsage1.idle)
-                        const cpuUsagePercentage =
-                            (totalUsage / (totalUsage + idleUsage)) * 100
-                             const startTime = process.cpuUsage();
-const endTime = process.cpuUsage();
-const usedTime = endTime.user - startTime.user + endTime.system - startTime.system;
-                        const ping = await client?.db?.ping()
-                        const embed1 = new MessageEmbed()
-                            .setColor(client.color)
-                            .setAuthor({
-                                name: 'BITZXIER Informations',
-                                iconURL: client.guilds.cache
-                                    .get('873228243757596672')
-                                    ?.members?.cache?.get('1180425876798701588')
-                                    ?.user?.displayAvatarURL({ dynamic: true })
-                            })
-                            .setDescription(
-                                `**__System Informations__**\nSystem Latency: ${
-                                    client.ws.ping
-                                }ms\nPlatform: ${
-                                    process.platform
-                                }\nArchitecture: ${
-                                    process.arch
-                                }\nMemory Usage: ${memoryUsageGB}/${totalMemoryGB}\nProcessor 1:\n> Model: ${
-                                    processors[0].model
-                                }\n> Speed: ${
-                                    processors[0].speed
-                                } MHz\nTimes:\n> User: ${
-                                    cpuUsage2.user
-                                } ms\n> Nice: ${cpuUsage2.nice} ms\n> Sys: ${
-                                    cpuUsage2.sys
-                                } ms\n> Idle: ${cpuUsage2.idle} ms\n> IRQ: ${
-                                    cpuUsage2.irq
-                                } ms\nDatabase Latency: ${
-                                    ping?.toFixed(2) || '0'
-                                }ms`
-                            )
-                            .setThumbnail(client.user.displayAvatarURL())
-                            .setFooter({
-                                text: `Requested By ${message.author.tag}`,
-                                iconURL: message.author.displayAvatarURL({
-                                    dynamic: true
-                                })
-                            })
-                        button = button.setDisabled(false)
-                        button1 = button1.setDisabled(false)
-                        button2 = button2.setDisabled(true)
-                        button3 = button3.setDisabled(false)
-                        const row1 = new MessageActionRow().addComponents([
-                            button,
-                            button1,
-                            button2,
-                            button3
-                        ])
-                        if (msg)
-                            return msg.edit(
-                                { embeds: [embed1], components: [row1] },
-                                message,
-                                msg
-                            )
-                    }, 2000)
-                }
+                        .setThumbnail(client.user.displayAvatarURL())
+                        .setFooter(`Requested By ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }));
+                    
+                    await msg.edit({ embeds: [systemInfoEmbed], components: [row] });
+                    break;
+                default:
+                    break;
             }
-        })
-        collector.on('end', () => {
-            if (msg) {
-                button = button.setDisabled(true)
-                button1 = button1.setDisabled(true)
-                button2 = button2.setDisabled(true)
-                button3 = button3.setDisabled(true)
-                const row1 = new MessageActionRow().addComponents([
-                    button,
-                    button1,
-                    button2,
-                    button3
-                ])
-                return msg.edit({ components: [row1] })
+        });
+
+        // Handle collector end event
+        collector.on('end', (collected, reason) => {
+            if (reason === 'time') {
+                msg.edit({ components: [] });
             }
-        })
+        });
     }
-}
+};*/

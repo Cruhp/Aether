@@ -10,7 +10,7 @@ const {
 module.exports = {
     name: 'unlock',
     category: 'mod',
-    premium: true,
+    premium: false,
 
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_CHANNELS')) {

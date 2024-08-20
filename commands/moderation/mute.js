@@ -1,8 +1,12 @@
+
+
+
+
 const { MessageEmbed } = require('discord.js')
 const ms = require(`ms`)
 module.exports = {
     name: 'mute',
-    aliases: ['timeout', 'stfu'],
+    aliases: ['mute','kys'],
     category: 'mod',
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MODERATE_MEMBERS')) {
@@ -11,7 +15,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You must have \`Timeout Members\` permissions to use this command.`
+                            `<a:Cross:1265733965180960849> | You must have \`Timeout Members\` permissions to use this command.`
                         )
                 ]
             })
@@ -22,7 +26,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I must have \`Timeout Members\` permissions to run this command.`
+                            `<a:Cross:1265733965180960849> | I must have \`Timeout Members\` permissions to run this command.`
                         )
                 ]
             })
@@ -39,7 +43,7 @@ module.exports = {
                         new MessageEmbed()
                             .setColor(client.color)
                             .setDescription(
-                                `${client.emoji.cross} | You didn't mentioned the member whom you want to mute.\n${message.guild.prefix}mute \`<member>\` \`<time>\` \`<reason>\``
+                                `<a:Cross:1265733965180960849> | You didn't mentioned the member whom you want to mute.\n${message.guild.prefix}mute \`<member>\` \`<time>\` \`<reason>\``
                                 )
                     ]
                 })
@@ -59,7 +63,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You didn't mentioned the member whom you want to mute.\n${message.guild.prefix}mute \`<member>\` \`<time>\` \`<reason>\``
+                            `<a:Cross:1265733965180960849> | You didn't mentioned the member whom you want to mute.\n${message.guild.prefix}mute \`<member>\` \`<time>\` \`<reason>\``
                         )
                 ]
             })
@@ -70,7 +74,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | <@${user.user.id}> is already muted!`
+                            `<a:Cross:1265733965180960849> | <@${user.user.id}> is already muted!`
                         )
                 ]
             })
@@ -80,7 +84,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | <@${user.user.id}> is having \`Administrator\` Perms!`
+                            `<a:Cross:1265733965180960849> | <@${user.user.id}> is having \`Administrator\` Perms!`
                         )
                 ]
             })
@@ -90,7 +94,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You cant mute me`
+                            `<a:Cross:1265733965180960849> | You cant mute me`
                         )
                 ]
             })
@@ -100,7 +104,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You Can't Mute Server Owner!`
+                            `<a:Cross:1265733965180960849> | You Can't Mute Server Owner!`
                         )
                 ]
             })
@@ -110,7 +114,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | You Can't Mute Yourself..!`
+                            `<a:Cross:1265733965180960849> | You Can't Mute Yourself..!`
                         )
                 ]
             })
@@ -120,7 +124,7 @@ module.exports = {
                     new MessageEmbed()
                         .setColor(client.color)
                         .setDescription(
-                            `${client.emoji.cross} | I don't have enough permissions to Mute <@${user.user.id}>`
+                            `<a:Cross:1265733965180960849> | I don't have enough permissions to Mute <@${user.user.id}>`
                         )
                 ]
             })
@@ -144,7 +148,7 @@ module.exports = {
                 new MessageEmbed()
                     .setColor(client.color)
                     .setDescription(
-                        `${client.emoji.tick} | Successfully muted <@${user.user.id}>!`
+                        `<a:Check:1265733979085078610> | Successfully muted <@${user.user.id}>!`
                     )
             ]
         })
